@@ -1,11 +1,15 @@
 import { Box, Button, Center, Input } from "@chakra-ui/react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { User } from "../entities/User";
+import usersService from "../services/usersService";
 
 const CreateUserForm = () => {
   const { register, handleSubmit } = useForm<User>();
-  const onSubmit: SubmitHandler<User> = (data) =>
-    console.log(JSON.stringify(data));
+  const onSubmit: SubmitHandler<User> = async (d) => {
+    const result = await usersService.post(d);
+
+    console.log(result);
+  };
 
   return (
     <>

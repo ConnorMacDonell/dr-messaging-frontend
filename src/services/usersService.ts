@@ -1,4 +1,4 @@
-import { CreateUserResponse } from "../entities/User";
+import {  User } from "../entities/User";
 import APIClient from "./api-client";
 
-export default new APIClient<CreateUserResponse>('/users');
+export default new APIClient<User>('/users');
