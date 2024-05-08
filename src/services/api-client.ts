@@ -19,7 +19,7 @@ class APIClient<T> {
     return axiosInstance.get<T>(`${this.endpoint}/${id}`).then((res) => res.data)
   }
 
-  post = (data: T) => {
+  post = (data: any) => {
     return axiosInstance.post<T>(this.endpoint, data).then(res => res.data);
   }
 }

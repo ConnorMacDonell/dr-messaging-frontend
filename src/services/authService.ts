@@ -1,4 +1,4 @@
 import APIClient from "./api-client";
-import { UserCredentials } from "../entities/User";
+import AuthToken from "../entities/AuthToken";
 
-export default new APIClient<UserCredentials>('/auth');
+export default new APIClient<AuthToken>('/auth');
