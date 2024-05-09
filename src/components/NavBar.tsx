@@ -18,8 +18,7 @@ const NavBar = () => {
   const toast = useToast();
   const navigate = useNavigate();
   const handleLogout = () => {
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("refresh_token");
+    localStorage.clear();
     toast({
       title: "Logged out",
       status: "info",
