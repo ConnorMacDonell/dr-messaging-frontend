@@ -10,12 +10,20 @@ const CreateUserForm = () => {
   const navigate = useNavigate();
   const toast = useToast();
   const [isLoading, setIsLoading] = useState(false);
-  const { register, handleSubmit } = useForm<User>();
+  const { register, handleSubmit } = useForm<User>({
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+    },
+  });
 
   const onSubmit: SubmitHandler<User> = async (d) => {
     try {
       setIsLoading(true);
       const result = await usersService.post(d);
+      console.log(result);
       setIsLoading(false);
 
       toast({
@@ -26,15 +34,25 @@ const CreateUserForm = () => {
         isClosable: true,
       });
       navigate("/login");
-    } catch (error) {
+    } catch (error: any) {
       setIsLoading(false);
-      toast({
-        title: "Signup failed",
-        description: "TO DO",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
+      if (error.code === "ERR_NETWORK") {
+        toast({
+          title: "Signup failed",
+          description: "Network error, please try again later.",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: "Signup failed",
+          description: error?.response?.data?.error,
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
     }
   };
 
