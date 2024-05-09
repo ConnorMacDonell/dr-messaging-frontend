@@ -5,6 +5,7 @@ const axiosInstance = axios.create({
   headers: {
     'Content-Type': 'application/json',
     Accept: "application/json",
+    'authorization': `Bearer ${localStorage.getItem('accessToken')}`
   }
 })
 
@@ -15,7 +16,7 @@ class APIClient<T> {
     this.endpoint = endpoint;
   }
 
-  get = (id: string | number) => {
+  get = (id: string) => {
     return axiosInstance.get<T>(`${this.endpoint}/${id}`).then((res) => res.data)
   }
 
