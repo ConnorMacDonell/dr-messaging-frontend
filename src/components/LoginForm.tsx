@@ -23,9 +23,8 @@ const LoginForm = () => {
     try {
       setIsLoading(true);
       const response: AuthToken = await authService.post(d);
-      localStorage.setItem("access_token", response.accessToken);
-      localStorage.setItem("refresh_token", response.refreshToken);
-      localStorage.setItem("user_email", d.email);
+      localStorage.setItem("accessToken", response.accessToken);
+      localStorage.setItem("refreshToken", response.refreshToken);
       setIsLoading(false);
 
       toast({
