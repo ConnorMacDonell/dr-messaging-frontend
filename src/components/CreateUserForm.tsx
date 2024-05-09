@@ -22,8 +22,7 @@ const CreateUserForm = () => {
   const onSubmit: SubmitHandler<User> = async (d) => {
     try {
       setIsLoading(true);
-      const result = await usersService.post(d);
-      console.log(result);
+      await usersService.post(d);
       setIsLoading(false);
 
       toast({

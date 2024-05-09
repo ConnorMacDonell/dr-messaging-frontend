@@ -49,12 +49,12 @@ const NavBar = () => {
             </MenuGroup>
           </MenuList>
         </Menu>
-        {!localStorage.getItem("access_token") && (
+        {!localStorage.getItem("accessToken") && (
           <Link to="/login">
             <Button colorScheme="gray">Login</Button>
           </Link>
         )}
-        {localStorage.getItem("access_token") && (
+        {localStorage.getItem("accessToken") && (
           <Button colorScheme="gray" onClick={handleLogout}>
             Logout
           </Button>
