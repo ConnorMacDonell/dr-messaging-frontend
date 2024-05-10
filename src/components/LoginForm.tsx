@@ -23,9 +23,9 @@ const LoginForm = () => {
     try {
       setIsLoading(true);
       const response: AuthToken = await authService.post(d);
+
       localStorage.setItem("accessToken", response.accessToken);
       localStorage.setItem("refreshToken", response.refreshToken);
-      setIsLoading(false);
 
       toast({
         title: "Login successful",

@@ -8,10 +8,10 @@ const Dashboard = () => {
     return <Navigate to="/login" />;
   }
 
-  const { data, error, isLoading } = useUser(user.userId);
+  const { data, error } = useUser(user.userId);
 
-  if (error) return null;
-  if (isLoading) return null;
+  if (error) return console.log(error);
+
   return (
     <>
       <div>Dashboard</div>

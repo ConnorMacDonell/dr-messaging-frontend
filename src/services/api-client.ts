@@ -17,7 +17,8 @@ class APIClient<T> {
   }
 
   get = (id: string) => {
-    return axiosInstance.get<T>(`${this.endpoint}/${id}`).then((res) => res.data)
+    axiosInstance.defaults.headers['authorization'] = `Bearer ${localStorage.getItem('accessToken')}`;
+    return axiosInstance.get<T>(`${this.endpoint}/${id}`).then((res) => res.data);
   }
 
   post = (data: any) => {
