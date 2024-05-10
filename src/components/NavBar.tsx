@@ -39,8 +39,12 @@ const NavBar = () => {
           </MenuButton>
           <MenuList>
             <MenuGroup title="Profile">
-              <MenuItem>My Account</MenuItem>
-              <MenuItem>Payments </MenuItem>
+              <Link to="/dashboard">
+                <MenuItem>Dashboard</MenuItem>
+              </Link>
+              <Link to="/user_settings">
+                <MenuItem>Account Settings</MenuItem>
+              </Link>
             </MenuGroup>
             <MenuDivider />
             <MenuGroup title="Help">
