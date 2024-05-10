@@ -11,8 +11,8 @@ const Dashboard = () => {
   const { data, error } = useUser(user.userId);
 
   if (error) {
-    return null;
     console.log(error);
+    return null;
   }
 
   return (
