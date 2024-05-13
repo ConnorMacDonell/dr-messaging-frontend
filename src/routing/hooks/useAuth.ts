@@ -9,11 +9,11 @@ declare module 'jwt-decode'{
 }
 
 const useAuth = () => {
-  if (!localStorage['accessToken']) return { user: null };
+  if (!localStorage['accessToken']) return { authorizedUser: null };
 
   const user = <UserJwtPayload>jwtDecode(localStorage['accessToken']);
 
-  return {user: user};
+  return { authorizedUser: user };
 }
 
 export default useAuth;

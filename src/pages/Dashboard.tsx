@@ -3,12 +3,12 @@ import useAuth from "../routing/hooks/useAuth";
 import useUser from "../hooks/useUser";
 
 const Dashboard = () => {
-  const { user } = useAuth();
-  if (!user) {
+  const { authorizedUser } = useAuth();
+  if (!authorizedUser) {
     return <Navigate to="/login" />;
   }
 
-  const { data, error } = useUser(user.userId);
+  const { data, error } = useUser(authorizedUser.userId);
 
   if (error) {
     console.log(error);
