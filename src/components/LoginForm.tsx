@@ -5,6 +5,7 @@ import {
   Input,
   InputGroup,
   InputRightElement,
+  Link,
   Spinner,
   VStack,
   useToast,
@@ -15,6 +16,7 @@ import { UserCredentials } from "../entities/User";
 import { SubmitHandler, useForm } from "react-hook-form";
 import authService from "../services/authService";
 import AuthToken from "../entities/AuthToken";
+import FormLabel from "./FormLabel";
 
 const LoginForm = () => {
   const [show, setShow] = useState(false);
@@ -48,20 +50,18 @@ const LoginForm = () => {
   return (
     <>
       <Center>
-        <Box>
-          <VStack
-            borderRadius="md"
-            borderWidth={1}
-            borderColor="black"
-            width="50vw"
-            boxShadow="10px 5px 5px gray">
+        <Box
+          borderRadius="md"
+          borderWidth={1}
+          borderColor="black"
+          width="50vw"
+          boxShadow="10px 5px 5px gray">
+          <VStack>
             <form onSubmit={handleSubmit(onSubmit)}>
-              <Center fontSize="42px" marginBottom={2} marginTop={10}>
-                <label>LOGIN</label>
-              </Center>
-              <Center marginBottom={10} textColor="gray">
-                <p>Please enter your email and password</p>
-              </Center>
+              <FormLabel
+                title="Login"
+                message="Please enter your email and password"
+              />
               <Input
                 {...register("email", { required: "Email is required." })}
                 placeholder="Email"
@@ -92,16 +92,19 @@ const LoginForm = () => {
                 </InputRightElement>
               </InputGroup>
               <Center>
-                <Button
-                  type="submit"
-                  borderRadius="md"
-                  borderWidth={0}
-                  bg="cyan.600"
-                  _hover={{ bg: "cyan.200" }}
-                  variant="ghost"
-                  marginBottom={10}>
-                  {isLoading ? <Spinner /> : "Login"}
-                </Button>
+                <VStack>
+                  <Link textColor="gray">Forgot your password?</Link>
+                  <Button
+                    type="submit"
+                    borderRadius="md"
+                    borderWidth={0}
+                    bg="cyan.600"
+                    _hover={{ bg: "cyan.200" }}
+                    variant="ghost"
+                    marginBottom={10}>
+                    {isLoading ? <Spinner /> : "Login"}
+                  </Button>
+                </VStack>
               </Center>
             </form>
           </VStack>
