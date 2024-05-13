@@ -1,10 +1,11 @@
-import { Box, Button, Center, Input, Spinner } from "@chakra-ui/react";
+import { Box, Button, Center, Input, Spinner, VStack } from "@chakra-ui/react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { User } from "../entities/User";
 import usersService from "../services/usersService";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
+import FormLabel from "./FormLabel";
 
 const CreateUserForm = () => {
   const navigate = useNavigate();
@@ -58,60 +59,85 @@ const CreateUserForm = () => {
   return (
     <>
       <Center>
-        <Box width="33vw">
-          Signup
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <label></label>
-            <Input
-              {...register("firstName", {
-                required: "First name is required",
-                maxLength: {
-                  value: 20,
-                  message: "Name cannot exceed 20 characters",
-                },
-              })}
-              placeholder="First Name"
-              variant="filled"
-              borderRadius={4}
-              marginBottom={3}></Input>
-            <Input
-              {...register("lastName", {
-                required: "Last name is required.",
-                maxLength: {
-                  value: 20,
-                  message: "Name cannot exceed 20 characters",
-                },
-              })}
-              placeholder="Last Name"
-              variant="filled"
-              borderRadius={4}
-              marginBottom={3}></Input>
-            <Input
-              {...register("email", { required: "Email is required" })}
-              placeholder="Email"
-              type="email"
-              variant="filled"
-              borderRadius={4}
-              marginBottom={3}></Input>
-            <Input
-              {...register("password", {
-                required: "Password is required",
-                minLength: {
-                  value: 8,
-                  message: "Password must be at least 8 characters",
-                },
-                maxLength: {
-                  value: 42,
-                  message: "Password cannot exceed 42 characters",
-                },
-              })}
-              placeholder="Password"
-              type="password"
-              variant="filled"
-              borderRadius={4}
-              marginBottom={3}></Input>
-            <Button type="submit">{isLoading ? <Spinner /> : "Sign Up"}</Button>
-          </form>
+        <Box
+          borderRadius="md"
+          borderWidth={1}
+          borderColor="black"
+          width="50vw"
+          height="66vh"
+          boxShadow="10px 5px 5px gray">
+          <Center>
+            <VStack width="66%">
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <FormLabel
+                  title="Wecome!"
+                  message="Please enter new account details"
+                />
+                <Input
+                  {...register("firstName", {
+                    required: "First name is required",
+                    maxLength: {
+                      value: 20,
+                      message: "Name cannot exceed 20 characters",
+                    },
+                  })}
+                  placeholder="First Name"
+                  variant="filled"
+                  borderRadius={4}
+                  marginBottom={3}></Input>
+                <Input
+                  {...register("lastName", {
+                    required: "Last name is required.",
+                    maxLength: {
+                      value: 20,
+                      message: "Name cannot exceed 20 characters",
+                    },
+                  })}
+                  placeholder="Last Name"
+                  variant="filled"
+                  borderRadius={4}
+                  marginBottom={3}></Input>
+                <Input
+                  {...register("email", { required: "Email is required" })}
+                  placeholder="Email"
+                  type="email"
+                  variant="filled"
+                  borderRadius={4}
+                  marginBottom={3}></Input>
+                <Input
+                  {...register("password", {
+                    required: "Password is required",
+                    minLength: {
+                      value: 8,
+                      message: "Password must be at least 8 characters",
+                    },
+                    maxLength: {
+                      value: 42,
+                      message: "Password cannot exceed 42 characters",
+                    },
+                  })}
+                  placeholder="Password"
+                  type="password"
+                  variant="filled"
+                  borderRadius={4}
+                  marginBottom={3}></Input>
+                <Center>
+                  <Button
+                    type="submit"
+                    borderRadius="md"
+                    borderWidth={0}
+                    bg="cyan.600"
+                    _hover={{ bg: "cyan.200" }}
+                    variant="ghost"
+                    marginBottom={10}
+                    marginTop={7}
+                    width="33%">
+                    {isLoading ? <Spinner /> : "Sign Up"}
+                  </Button>
+                </Center>
+              </form>
+            </VStack>
+          </Center>
         </Box>
       </Center>
     </>
