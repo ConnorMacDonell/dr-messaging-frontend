@@ -63,13 +63,25 @@ const CreateUserForm = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <label></label>
             <Input
-              {...register("firstName")}
+              {...register("firstName", {
+                required: "First name is required",
+                maxLength: {
+                  value: 20,
+                  message: "Name cannot exceed 20 characters",
+                },
+              })}
               placeholder="First Name"
               variant="filled"
               borderRadius={4}
               marginBottom={3}></Input>
             <Input
-              {...register("lastName")}
+              {...register("lastName", {
+                required: "Last name is required.",
+                maxLength: {
+                  value: 20,
+                  message: "Name cannot exceed 20 characters",
+                },
+              })}
               placeholder="Last Name"
               variant="filled"
               borderRadius={4}
@@ -82,7 +94,17 @@ const CreateUserForm = () => {
               borderRadius={4}
               marginBottom={3}></Input>
             <Input
-              {...register("password", { required: "Password is required" })}
+              {...register("password", {
+                required: "Password is required",
+                minLength: {
+                  value: 8,
+                  message: "Password must be at least 8 characters",
+                },
+                maxLength: {
+                  value: 42,
+                  message: "Password cannot exceed 42 characters",
+                },
+              })}
               placeholder="Password"
               type="password"
               variant="filled"
