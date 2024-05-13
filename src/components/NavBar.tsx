@@ -34,7 +34,7 @@ const NavBar = () => {
       </Link>
       <Box>
         <Menu>
-          <MenuButton as={Button} colorScheme="blue">
+          <MenuButton as={Button} bg="cyan.600">
             Profile
           </MenuButton>
           <MenuList>
