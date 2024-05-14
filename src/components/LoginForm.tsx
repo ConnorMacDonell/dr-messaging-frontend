@@ -98,10 +98,15 @@ const LoginForm = () => {
                     type="submit"
                     borderRadius="md"
                     borderWidth={0}
-                    bg="cyan.600"
-                    _hover={{ bg: "cyan.200" }}
+                    bg="#000080"
+                    _hover={{
+                      bg: "white",
+                      textColor: "black",
+                      borderWidth: "1px",
+                    }}
                     variant="ghost"
-                    marginBottom={10}>
+                    marginBottom={10}
+                    textColor="White">
                     {isLoading ? <Spinner /> : "Login"}
                   </Button>
                 </VStack>

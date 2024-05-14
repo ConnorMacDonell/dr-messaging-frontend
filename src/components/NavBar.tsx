@@ -30,11 +30,19 @@ const NavBar = () => {
   return (
     <HStack width="100vw" justify="space-between" padding={5}>
       <Link to="/">
-        <Image src={logo} boxSize="60px" objectFit="cover" />
+        <Image src={logo} boxSize="60px" objectFit="cover" borderRadius={2} />
       </Link>
       <Box>
         <Menu>
-          <MenuButton as={Button} bg="cyan.600">
+          <MenuButton
+            as={Button}
+            bg="#000080"
+            textColor="white"
+            _hover={{
+              bg: "white",
+              textColor: "black",
+              borderWidth: "1px",
+            }}>
             Profile
           </MenuButton>
           <MenuList>
