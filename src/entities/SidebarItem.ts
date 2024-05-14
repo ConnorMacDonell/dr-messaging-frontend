@@ -1,5 +1,5 @@
 import { IconType } from "react-icons";
-import { FaArrowRightFromBracket, FaGauge, FaGear, FaLocationCrosshairs, FaSnowflake, FaUser } from "react-icons/fa6";
+import { FaArrowRightFromBracket, FaGauge, FaLocationCrosshairs, FaSnowflake, FaUser } from "react-icons/fa6";
 
 export interface SidebarItem {
   icon: IconType;
