@@ -20,15 +20,8 @@ const SidebarContainer = ({ children, sidebar }: Props) => {
           paddingTop={8}
           height="100vh"
           overflow="auto"
-          css={{
-            "&::-webkit-scrollbar": {
-              height: "var(--chakra-sizes-1)",
-              width: "var(--chakra-sizes-1)",
-            },
-            "&::-webkit-scrollbar-thumb": {
-              backgroundColor: "var(--chakra-colors-gray-400)",
-            },
-          }}>
+          bg="#0163A8"
+          textColor="white">
           {sidebar}
         </Box>
       </GridItem>

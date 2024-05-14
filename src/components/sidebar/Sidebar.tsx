@@ -18,7 +18,11 @@ const Sidebar = () => {
   const { isOpen, onClose } = useSidebar();
   return (
     <>
-      <VStack spacing="5" as="nav" display={{ base: "none", md: "flex" }}>
+      <VStack
+        spacing="5"
+        as="nav"
+        display={{ base: "none", md: "flex" }}
+        width="100%">
         <Image src={logo} boxSize="60px" objectFit="cover" borderRadius={2} />
         <SidebarDesktop sidebarItems={SidebarItems} />
       </VStack>
