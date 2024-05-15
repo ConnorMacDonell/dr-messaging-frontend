@@ -9,7 +9,6 @@ import useAuth from "../routing/hooks/useAuth";
 const Layout = () => {
   const { currentUserId } = useAuth();
 
-  console.log(`LAYOUT, userid: ${currentUserId}`);
   return (
     <>
       {currentUserId && (
