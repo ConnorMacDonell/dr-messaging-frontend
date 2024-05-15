@@ -6,6 +6,7 @@ import { RouterProvider } from "react-router-dom";
 import router from "./routing/routes.tsx";
 import "./index.css";
 import theme from "./theme.ts";
+import AuthProvider from "./components/providers/AuthProvider.tsx";
 
 const queryClient = new QueryClient();
 
@@ -14,11 +15,12 @@ const queryClient = new QueryClient();
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
-      <ColorModeScript
-        initialColorMode={theme.config.initialColorMode}></ColorModeScript>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-      </QueryClientProvider>
+      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+      <AuthProvider>
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+        </QueryClientProvider>
+      </AuthProvider>
     </ChakraProvider>
   </React.StrictMode>
 );
