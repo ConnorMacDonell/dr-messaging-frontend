@@ -36,23 +36,17 @@ const CreateUserForm = () => {
       navigate("/login");
     } catch (error: any) {
       setIsLoading(false);
-      if (error.code === "ERR_NETWORK") {
-        toast({
-          title: "Signup failed",
-          description: "Network error, please try again later.",
-          status: "error",
-          duration: 3000,
-          isClosable: true,
-        });
-      } else {
-        toast({
-          title: "Signup failed",
-          description: error?.response?.data?.error,
-          status: "error",
-          duration: 3000,
-          isClosable: true,
-        });
-      }
+      const description =
+        error.code === "ERR_NETWORK"
+          ? "Network error, please try again later."
+          : error?.response?.data?.error;
+      toast({
+        title: "Edit failed",
+        description: description,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
     }
   };
 
