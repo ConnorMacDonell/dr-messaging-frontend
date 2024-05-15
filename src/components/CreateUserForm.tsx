@@ -64,13 +64,12 @@ const CreateUserForm = () => {
           borderWidth={1}
           borderColor="black"
           width="50vw"
-          height="66vh"
           boxShadow="10px 5px 5px gray">
           <Center>
             <VStack width="66%">
               <form onSubmit={handleSubmit(onSubmit)}>
                 <FormLabel
-                  title="Wecome!"
+                  title="Welcome!"
                   message="Please enter new account details"
                 />
                 <Input
@@ -84,7 +83,8 @@ const CreateUserForm = () => {
                   placeholder="First Name"
                   variant="filled"
                   borderRadius={4}
-                  marginBottom={3}></Input>
+                  marginBottom={3}
+                  autoFocus></Input>
                 <Input
                   {...register("lastName", {
                     required: "Last name is required.",
@@ -127,6 +127,7 @@ const CreateUserForm = () => {
                     borderRadius="md"
                     borderWidth={0}
                     bg="#000080"
+                    textColor="white"
                     _hover={{
                       bg: "white",
                       textColor: "black",

@@ -23,9 +23,11 @@ const Layout = () => {
       )}
       {!currentUserId && (
         <>
-          <NavBar />{" "}
-          <Box padding={5}>
-            <Outlet></Outlet>
+          <Box height="100vh">
+            <NavBar />{" "}
+            <Box padding={5}>
+              <Outlet></Outlet>
+            </Box>
           </Box>
         </>
       )}

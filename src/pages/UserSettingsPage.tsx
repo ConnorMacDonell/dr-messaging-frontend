@@ -1,4 +1,3 @@
-import { Navigate } from "react-router-dom";
 import useAuth from "../routing/hooks/useAuth";
 import useUser from "../hooks/useUser";
 import UserProfileDisplay from "../components/UserProfileDisplay";

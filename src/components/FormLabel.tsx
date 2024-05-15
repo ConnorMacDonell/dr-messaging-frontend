@@ -9,7 +9,7 @@ const FormLabel = ({ title, message }: Props) => {
   return (
     <Center>
       <VStack>
-        <Box fontSize="42px" marginBottom={2} marginTop={10}>
+        <Box fontSize="42px" marginBottom={2} marginTop={5}>
           <label>{title}</label>
         </Box>
         <Box marginBottom={10} textColor="gray">

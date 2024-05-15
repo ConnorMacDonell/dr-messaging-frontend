@@ -52,7 +52,8 @@ const LoginForm = () => {
                 type="email"
                 variant="filled"
                 borderRadius={4}
-                marginBottom={3}></Input>
+                marginBottom={3}
+                autoFocus></Input>
               <InputGroup size="md">
                 <Input
                   {...register("password", {
@@ -89,7 +90,7 @@ const LoginForm = () => {
                       borderWidth: "1px",
                     }}
                     variant="ghost"
-                    marginBottom={10}
+                    marginBottom={7}
                     textColor="White">
                     {isLoading ? <Spinner /> : "Login"}
                   </Button>
