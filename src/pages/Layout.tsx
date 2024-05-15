@@ -4,11 +4,15 @@ import { Box } from "@chakra-ui/react";
 import Sidebar from "../components/sidebar/Sidebar";
 import SidebarProvider from "../components/providers/SideBarProvider";
 import SidebarContainer from "../components/sidebar/SidebarContainer";
+import useAuth from "../routing/hooks/useAuth";
 
 const Layout = () => {
+  const { currentUserId } = useAuth();
+
+  console.log(`LAYOUT, userid: ${currentUserId}`);
   return (
     <>
-      {localStorage.getItem("accessToken") && (
+      {currentUserId && (
         <SidebarProvider>
           <SidebarContainer sidebar={<Sidebar />}>
             <Box padding={5}>
@@ -17,7 +21,7 @@ const Layout = () => {
           </SidebarContainer>
         </SidebarProvider>
       )}
-      {!localStorage.getItem("accessToken") && (
+      {!currentUserId && (
         <>
           <NavBar />{" "}
           <Box padding={5}>

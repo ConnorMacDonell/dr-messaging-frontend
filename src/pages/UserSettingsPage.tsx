@@ -7,12 +7,9 @@ import { useToast } from "@chakra-ui/react";
 
 const UserSettingsPage = () => {
   const toast = useToast();
-  const { authorizedUser } = useAuth();
-  if (!authorizedUser) {
-    return <Navigate to="/login" />;
-  }
+  const { currentUserId, token } = useAuth();
 
-  const { data, error } = useUser(authorizedUser.userId);
+  const { data, error } = useUser(currentUserId, token);
 
   if (error) {
     console.log(error);

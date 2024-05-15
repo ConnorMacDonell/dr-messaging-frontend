@@ -1,15 +1,11 @@
-import { Navigate } from "react-router-dom";
-import useAuth from "../routing/hooks/useAuth";
 import useUser from "../hooks/useUser";
+import useAuth from "../routing/hooks/useAuth";
 
 const Dashboard = () => {
-  const { authorizedUser } = useAuth();
-  if (!authorizedUser) {
-    return <Navigate to="/login" />;
-  }
+  const { currentUserId, token } = useAuth();
+  const { data, error } = useUser(currentUserId, token);
 
-  const { data, error } = useUser(authorizedUser.userId);
-
+  console.log(`DASHBOARD, userId: ${currentUserId}`);
   if (error) {
     console.log(error);
     return null;
