@@ -1,9 +1,9 @@
 import { useToast } from "@chakra-ui/react";
 import React, { createContext, useState } from "react";
-import { JwtPayload, UserJwtPayload, jwtDecode } from "jwt-decode";
-import AuthToken from "../../entities/AuthToken";
-import authService from "../../services/authService";
-import { UserCredentials } from "../../entities/User";
+import { UserJwtPayload, jwtDecode } from "jwt-decode";
+import AuthToken from "../entities/AuthToken";
+import authService from "../services/authService";
+import { UserCredentials } from "../entities/User";
 
 declare module "jwt-decode" {
   export interface UserJwtPayload extends JwtPayload {

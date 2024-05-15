@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import { Box } from "@chakra-ui/react";
 import Sidebar from "../components/sidebar/Sidebar";
-import SidebarProvider from "../components/providers/SideBarProvider";
+import SidebarProvider from "../providers/SideBarProvider";
 import SidebarContainer from "../components/sidebar/SidebarContainer";
 import useAuth from "../routing/hooks/useAuth";
 

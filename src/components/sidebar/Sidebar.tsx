@@ -11,7 +11,7 @@ import {
   Image,
   VStack,
 } from "@chakra-ui/react";
-import { useSidebar } from "../providers/SideBarProvider";
+import { useSidebar } from "../../providers/SideBarProvider";
 import logo from "../../assets/skull.jpg";
 
 const Sidebar = () => {

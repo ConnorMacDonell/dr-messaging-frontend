@@ -6,7 +6,7 @@ import { RouterProvider } from "react-router-dom";
 import router from "./routing/routes.tsx";
 import "./index.css";
 import theme from "./theme.ts";
-import AuthProvider from "./components/providers/AuthProvider.tsx";
+import AuthProvider from "./providers/AuthProvider.tsx";
 
 const queryClient = new QueryClient();
 
