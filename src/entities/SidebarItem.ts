@@ -16,31 +16,31 @@ export const SidebarItems = [
   {
     icon: FaGauge,
     label: "Dashboard",
-    linkTo: "/Dashboard",
+    linkTo: "/dashboard",
     group: ""
   },
   {
     icon: FaSnowflake,
     label: "Forecast",
-    linkTo: "/Forecast",
+    linkTo: "/forecast",
     group: ""
   },
   {
     icon: FaLocationCrosshairs,
     label: "Location",
-    linkTo: "/Location",
+    linkTo: "/location",
     group: ""
   },
   {
     icon: FaUser,
     label: "User Settings",
-    linkTo: "/Settings",
+    linkTo: "/user_settings",
     group: "bottom"
   },
   {
     icon: FaArrowRightFromBracket,
     label: "Logout",
-    linkTo: "/Logout",
+    linkTo: "/",
     group: "bottom"
   }
 ];
