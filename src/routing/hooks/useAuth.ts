@@ -1,19 +1,13 @@
-import { UserJwtPayload, jwtDecode } from "jwt-decode";
-
-declare module 'jwt-decode'{
-  export interface UserJwtPayload extends JwtPayload {
-    userId: string;
-    email: string;
-    permissionFlags: number;
-  }
-}
+import { useContext } from "react";
+import { AuthContext } from "../../components/providers/AuthProvider";
 
 const useAuth = () => {
-  if (!localStorage['accessToken']) return { authorizedUser: null };
+  return useContext(AuthContext);
+  // if (!localStorage['accessToken']) return { authorizedUser: null };
 
-  const user = <UserJwtPayload>jwtDecode(localStorage['accessToken']);
+  // const user = <UserJwtPayload>jwtDecode(localStorage['accessToken']);
 
-  return { authorizedUser: user };
+  // return { authorizedUser: user };
 }
 
 export default useAuth;
