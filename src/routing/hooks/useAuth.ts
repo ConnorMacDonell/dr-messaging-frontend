@@ -2,12 +2,14 @@ import { useContext } from "react";
 import { AuthContext } from "../../components/providers/AuthProvider";
 
 const useAuth = () => {
-  return useContext(AuthContext);
-  // if (!localStorage['accessToken']) return { authorizedUser: null };
 
-  // const user = <UserJwtPayload>jwtDecode(localStorage['accessToken']);
+  const authContext = useContext(AuthContext);
 
-  // return { authorizedUser: user };
+  if (!authContext) {
+    throw new Error("useAuth must be used within <AuthContext.PRovider>");
+  }
+
+  return authContext;
 }
 
 export default useAuth;
