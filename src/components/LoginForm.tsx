@@ -14,7 +14,7 @@ import { UserCredentials } from "../entities/User";
 import { SubmitHandler, useForm } from "react-hook-form";
 import FormLabel from "./FormLabel";
 import useAuth from "../routing/hooks/useAuth";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const [show, setShow] = useState(false);
@@ -23,11 +23,13 @@ const LoginForm = () => {
   const handleClickShowButton = () => setShow(!show);
   const { onLogin } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const onSubmit: SubmitHandler<UserCredentials> = async (d) => {
     setIsLoading(true);
     await onLogin(d);
-    navigate("/dashboard");
+    const origin = location.state?.from?.pathname || "/dashboard";
+    navigate(origin);
     setIsLoading(false);
   };
 

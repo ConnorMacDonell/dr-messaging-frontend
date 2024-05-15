@@ -3,13 +3,14 @@ import Sidebar from "../components/sidebar/Sidebar";
 import SidebarContainer from "../components/sidebar/SidebarContainer";
 import SidebarProvider from "../providers/SideBarProvider";
 import useAuth from "./hooks/useAuth";
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 
 const PrivateRoutes = () => {
   const { currentUserId } = useAuth();
+  const location = useLocation();
 
   if (!currentUserId) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/login" replace state={{ from: location }} />;
   }
   return (
     <SidebarProvider>
