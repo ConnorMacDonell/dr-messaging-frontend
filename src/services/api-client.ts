@@ -1,11 +1,12 @@
 import axios from "axios";
+import AuthToken from "../entities/AuthToken";
 
 const axiosInstance = axios.create({
   baseURL: 'http://localhost:3000',
   headers: {
     'Content-Type': 'application/json',
     Accept: "application/json",
-    'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+    'authorization': ``
   }
 })
 
@@ -16,8 +17,8 @@ class APIClient<T> {
     this.endpoint = endpoint;
   }
 
-  get = (id: string) => {
-    axiosInstance.defaults.headers['authorization'] = `Bearer ${localStorage.getItem('accessToken')}`;
+  get = (id: string, token: AuthToken) => {
+    axiosInstance.defaults.headers['authorization'] = `Bearer ${token.accessToken}`;
     return axiosInstance.get<T>(`${this.endpoint}/${id}`).then((res) => res.data);
   }
 
