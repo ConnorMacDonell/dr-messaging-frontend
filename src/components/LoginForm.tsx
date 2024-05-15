@@ -8,43 +8,27 @@ import {
   Link,
   Spinner,
   VStack,
-  useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { UserCredentials } from "../entities/User";
 import { SubmitHandler, useForm } from "react-hook-form";
-import authService from "../services/authService";
-import AuthToken from "../entities/AuthToken";
 import FormLabel from "./FormLabel";
+import useAuth from "../routing/hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const [show, setShow] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
-  const toast = useToast();
   const { register, handleSubmit } = useForm<UserCredentials>();
   const handleClickShowButton = () => setShow(!show);
+  const { onLogin } = useAuth();
+  const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<UserCredentials> = async (d) => {
-    try {
-      setIsLoading(true);
-      const response: AuthToken = await authService.post(d);
-
-      localStorage.setItem("accessToken", response.accessToken);
-      localStorage.setItem("refreshToken", response.refreshToken);
-
-      toast({
-        title: "Login successful",
-        status: "success",
-        duration: 3000,
-        isClosable: true,
-      });
-
-      navigate(`/dashboard`);
-    } catch (error) {
-      setIsLoading(false);
-    }
+    setIsLoading(true);
+    await onLogin(d);
+    navigate("/dashboard");
+    setIsLoading(false);
   };
 
   return (

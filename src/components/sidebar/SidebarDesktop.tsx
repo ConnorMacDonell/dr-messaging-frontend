@@ -1,18 +1,24 @@
 import { SidebarItem, SidebarItemProps } from "../../entities/SidebarItem";
-import { Flex, Grid, GridItem, Icon, Link, Text } from "@chakra-ui/react";
+import { Flex, Icon, Link, List, ListItem, Text } from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
+import useAuth from "../../routing/hooks/useAuth";
 
 const SidebarDesktop = ({ sidebarItems }: SidebarItemProps) => {
+  const { onLogout } = useAuth();
+  const handleLogout = () => {
+    onLogout();
+  };
   const sidebarItemsDesktop = (item: SidebarItem, index: number) => (
-    <GridItem key={index}>
+    <ListItem key={index}>
       <Link
         display="block"
         as={NavLink}
         to={item.linkTo}
+        onClick={item.label === "Logout" ? handleLogout : () => {}}
         _focus={{ bg: "#1A2933" }}
         _hover={{ bg: "#1A2933", color: "white" }}
         _activeLink={{ bg: "#1A2933", color: "white" }}
-        w="full"
+        w="100%"
         borderRadius={3}
         padding={2}
         height="5vh">
@@ -23,12 +29,12 @@ const SidebarDesktop = ({ sidebarItems }: SidebarItemProps) => {
           </Text>
         </Flex>
       </Link>
-    </GridItem>
+    </ListItem>
   );
   return (
-    <Grid width="100%" height="100%" gap={3}>
+    <List>
       {sidebarItems.map((item, index) => sidebarItemsDesktop(item, index))}
-    </Grid>
+    </List>
   );
 };
 
