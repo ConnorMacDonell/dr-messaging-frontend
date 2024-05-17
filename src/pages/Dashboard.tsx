@@ -1,13 +1,20 @@
 import useUser from "../hooks/useUser";
 import useAuth from "../routing/hooks/useAuth";
+import { authTokenGuard } from "../util/AuthTokenGuard";
+import { safeJsonParse } from "../util/SafeJsonParse";
 
 const Dashboard = () => {
-  const { currentUserId, token } = useAuth();
-  const { data, error } = useUser(currentUserId, token);
+  const { token, userId } = useAuth();
 
-  console.log(`DASHBOARD, userId: ${currentUserId}`);
+  const tokenGuardResult = safeJsonParse(authTokenGuard)(token);
+  if (tokenGuardResult.hasError) {
+    console.log(`Dashboard, tokenError: ${tokenGuardResult.error}`);
+    return null;
+  }
+  const { data, error } = useUser(userId, tokenGuardResult.parsed);
+
   if (error) {
-    console.log(error);
+    console.log(`Dashboard generic error: ${error}`);
     return null;
   }
 

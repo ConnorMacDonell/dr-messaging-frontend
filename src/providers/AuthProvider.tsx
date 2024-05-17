@@ -1,25 +1,18 @@
 import { useToast } from "@chakra-ui/react";
-import React, { createContext, useState } from "react";
+import React, { createContext } from "react";
 import { UserJwtPayload, jwtDecode } from "jwt-decode";
 import AuthToken from "../entities/AuthToken";
 import authService from "../services/authService";
 import { UserCredentials } from "../entities/User";
-
-declare module "jwt-decode" {
-  export interface UserJwtPayload extends JwtPayload {
-    userId: string;
-    email: string;
-    permissionFlags: number;
-  }
-}
+import usePersistState from "../hooks/usePersistState";
 
 interface Props {
   children: React.ReactNode;
 }
 
 interface AuthContextType {
-  token: AuthToken;
-  currentUserId: string;
+  token: string;
+  userId: string;
   onLogin: (data: UserCredentials) => Promise<void>;
   onLogout: () => void;
 }
@@ -27,8 +20,11 @@ interface AuthContextType {
 export const AuthContext = createContext<AuthContextType | null>(null);
 
 const AuthProvider = ({ children }: Props) => {
-  const [token, setToken] = useState({ accessToken: "", refreshToken: "" });
-  const [currentUserId, setCurrentUserId] = useState("");
+  const [token, setToken] = usePersistState<AuthToken>("token", {
+    accessToken: "",
+    refreshToken: "",
+  });
+  const [userId, setCurrentUserId] = usePersistState("user", "");
   const toast = useToast();
 
   const handleLogin = async (data: UserCredentials) => {
@@ -68,7 +64,7 @@ const AuthProvider = ({ children }: Props) => {
 
   const value = {
     token,
-    currentUserId,
+    userId,
     onLogin: handleLogin,
     onLogout: handleLogout,
   };

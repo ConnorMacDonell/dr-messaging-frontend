@@ -3,12 +3,21 @@ import useUser from "../hooks/useUser";
 import UserProfileDisplay from "../components/UserProfileDisplay";
 import EditUserSettingsForm from "../components/EditUserSettingsForm";
 import { useToast } from "@chakra-ui/react";
+import { authTokenGuard } from "../util/AuthTokenGuard";
+import { safeJsonParse } from "../util/SafeJsonParse";
 
 const UserSettingsPage = () => {
   const toast = useToast();
-  const { currentUserId, token } = useAuth();
+  const { userId, token } = useAuth();
+  const currentUserId = userId;
 
-  const { data, error } = useUser(currentUserId, token);
+  const tokenGuardResult = safeJsonParse(authTokenGuard)(token);
+  if (tokenGuardResult.hasError) {
+    console.log(`Dashboard, tokenError: ${tokenGuardResult.error}`);
+    return null;
+  }
+
+  const { data, error } = useUser(currentUserId, tokenGuardResult.parsed);
 
   if (error) {
     console.log(error);
@@ -33,7 +42,7 @@ const UserSettingsPage = () => {
         lastName={data?.lastName}
         permissions={data.permissionFlags}
       />
-      <EditUserSettingsForm />
+      <EditUserSettingsForm userData={data} token={tokenGuardResult.parsed} />
     </>
   );
 };

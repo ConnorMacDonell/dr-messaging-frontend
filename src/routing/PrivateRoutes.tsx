@@ -6,7 +6,8 @@ import useAuth from "./hooks/useAuth";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 
 const PrivateRoutes = () => {
-  const { currentUserId } = useAuth();
+  const authInfo = useAuth();
+  const currentUserId = authInfo.userId;
   const location = useLocation();
 
   if (!currentUserId) {
