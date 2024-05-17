@@ -41,7 +41,7 @@ const CreateUserForm = () => {
           ? "Network error, please try again later."
           : error?.response?.data?.error;
       toast({
-        title: "Edit failed",
+        title: "Signup failed",
         description: description,
         status: "error",
         duration: 3000,

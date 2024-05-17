@@ -15,3 +15,15 @@ export interface User {
   lastName?: string;
   permissionFlags: number;
 }
+
+export interface UserResponse {
+  _id: string;
+  email: string;
+  firstName?: string;
+  lastName?: string;
+  permissionFlags: number;
+}
+
+export interface UsersResponse {
+  users: UserResponse[];
+}

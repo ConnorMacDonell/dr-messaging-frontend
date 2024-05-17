@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import userService from "../services/usersService"
+import userService from "../services/userService"
 import AuthToken from "../entities/AuthToken";
 
 const useUser = (data: string, token: AuthToken) => useQuery({
