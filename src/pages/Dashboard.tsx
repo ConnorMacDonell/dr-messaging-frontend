@@ -23,9 +23,6 @@ const Dashboard = () => {
       <div>Dashboard</div>
       <div>Hello, {data?.firstName}!</div>
       <div>Your email is: {data?.email}</div>
-      <div>
-        Your password is: {data?.password ? data?.password : "a secret"}
-      </div>
     </>
   );
 };

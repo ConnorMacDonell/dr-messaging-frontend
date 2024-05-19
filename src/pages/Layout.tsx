@@ -7,11 +7,11 @@ import SidebarContainer from "../components/sidebar/SidebarContainer";
 import useAuth from "../routing/hooks/useAuth";
 
 const Layout = () => {
-  const { currentUserId } = useAuth();
+  const { userId } = useAuth();
 
   return (
     <>
-      {currentUserId && (
+      {userId && (
         <SidebarProvider>
           <SidebarContainer sidebar={<Sidebar />}>
             <Box padding={5}>
@@ -20,7 +20,7 @@ const Layout = () => {
           </SidebarContainer>
         </SidebarProvider>
       )}
-      {!currentUserId && (
+      {!userId && (
         <>
           <Box height="100vh">
             <NavBar />{" "}
