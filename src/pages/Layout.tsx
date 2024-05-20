@@ -26,7 +26,7 @@ const Layout = () => {
             <GridItem height="12vh" width="100vw">
               <NavBar />{" "}
             </GridItem>
-            <GridItem height="88vh" width="100vw" bg="red">
+            <GridItem height="88vh" width="100vw">
               <Outlet></Outlet>
             </GridItem>
           </Grid>
