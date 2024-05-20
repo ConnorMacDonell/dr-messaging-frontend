@@ -1,5 +1,6 @@
 import { SidebarItem, SidebarItemProps } from "../../entities/SidebarItem";
 import {
+  Box,
   Flex,
   Grid,
   GridItem,
@@ -17,7 +18,6 @@ const SidebarDesktop = ({ sidebarItems }: SidebarItemProps) => {
   const handleLogout = () => {
     onLogout();
   };
-  const logoutLink = sidebarItems[sidebarItems.length - 1];
   const sidebarItemsDesktop = (item: SidebarItem, index: number) => (
     <ListItem key={index} width="100%">
       <Link
@@ -25,7 +25,7 @@ const SidebarDesktop = ({ sidebarItems }: SidebarItemProps) => {
         as={NavLink}
         to={item.linkTo}
         onClick={item.label === "Logout" ? handleLogout : () => {}}
-        marginTop={item.label === "Logout" ? "auto" : "0"}
+        marginBottom={item.label === "Logout" ? "5vh" : "0"}
         _focus={{ bg: "#1A2933" }}
         _hover={{ bg: "#1A2933", color: "white" }}
         _activeLink={{ bg: "#1A2933", color: "white" }}
@@ -50,31 +50,18 @@ const SidebarDesktop = ({ sidebarItems }: SidebarItemProps) => {
       height="100%">
       <GridItem width="100%">
         <List width="100%" height="100%">
-          {sidebarItems.map((item, index) => sidebarItemsDesktop(item, index))}
+          {sidebarItems[0].map((item, index) =>
+            sidebarItemsDesktop(item, index)
+          )}
         </List>
       </GridItem>
       <GridItem width="100%">
-        <Link
-          display="block"
-          as={NavLink}
-          to={logoutLink.linkTo}
-          onClick={logoutLink.label === "Logout" ? handleLogout : () => {}}
-          marginTop={logoutLink.label === "Logout" ? "auto" : "0"}
-          _focus={{ bg: "#1A2933" }}
-          _hover={{ bg: "#1A2933", color: "white" }}
-          _activeLink={{ bg: "#1A2933", color: "white" }}
-          w="100%"
-          borderRadius={3}
-          padding={2}
-          marginBottom="5vh"
-          height="5vh">
-          <Flex alignItems="center">
-            <Icon boxSize={5} as={logoutLink.icon} marginRight={3} />
-            <Text ml={2} fontSize="sm">
-              {logoutLink.label}
-            </Text>
-          </Flex>
-        </Link>
+        <Box height="0.5px" bg="gray.400" borderRadius={5}></Box>
+        <List width="100%" height="100%">
+          {sidebarItems[1].map((item, index) =>
+            sidebarItemsDesktop(item, index)
+          )}
+        </List>
       </GridItem>
     </Grid>
   );

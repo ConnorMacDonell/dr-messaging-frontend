@@ -1,5 +1,5 @@
 import { IconType } from "react-icons";
-import { FaArrowRightFromBracket, FaGauge, FaLocationCrosshairs, FaSnowflake, FaUser } from "react-icons/fa6";
+import { FaArrowRightFromBracket, FaGauge, FaLocationCrosshairs, FaMountainSun, FaPersonSkiing, FaSnowflake, FaUser } from "react-icons/fa6";
 
 export interface SidebarItem {
   icon: IconType;
@@ -9,10 +9,10 @@ export interface SidebarItem {
 }
 
 export interface SidebarItemProps {
-  sidebarItems: SidebarItem[];
+  sidebarItems: SidebarItem[][];
 }
 
-export const SidebarItems = [
+export const SidebarItems = [[
   {
     icon: FaGauge,
     label: "Dashboard",
@@ -32,6 +32,20 @@ export const SidebarItems = [
     group: ""
   },
   {
+    icon: FaMountainSun,
+    label: "Mountains",
+    linkTo: "/mountains",
+    group: ""
+  },
+  {
+    icon: FaPersonSkiing,
+    label: "Gear",
+    linkTo: "/gear",
+    group: ""
+  },
+],
+[
+  {
     icon: FaUser,
     label: "User Settings",
     linkTo: "/user_settings",
@@ -43,4 +57,4 @@ export const SidebarItems = [
     linkTo: "/",
     group: "bottom"
   }
-];
+]];
