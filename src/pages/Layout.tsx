@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import NavBar from "../components/NavBar";
-import { Box } from "@chakra-ui/react";
+import { Box, Grid, GridItem } from "@chakra-ui/react";
 import Sidebar from "../components/sidebar/Sidebar";
 import SidebarProvider from "../providers/SideBarProvider";
 import SidebarContainer from "../components/sidebar/SidebarContainer";
@@ -22,12 +22,14 @@ const Layout = () => {
       )}
       {!userId && (
         <>
-          <Box height="100vh" width="100vw">
-            <NavBar />{" "}
-            <Box width="100vw">
+          <Grid height="100vh" width="100vw" templateRows="1fr auto">
+            <GridItem height="12vh" width="100vw">
+              <NavBar />{" "}
+            </GridItem>
+            <GridItem height="88vh" width="100vw" bg="red">
               <Outlet></Outlet>
-            </Box>
-          </Box>
+            </GridItem>
+          </Grid>
         </>
       )}
     </>

@@ -4,9 +4,14 @@ import { Link } from "react-router-dom";
 
 const NavBar = () => {
   return (
-    <HStack width="100vw" justify="space-between" padding={5}>
+    <HStack
+      height="100%"
+      width="100%"
+      justify="space-between"
+      padding={5}
+      overflow="hidden">
       <Link to="/">
-        <Image src={logo} boxSize="60px" objectFit="cover" borderRadius={2} />
+        <Image src={logo} boxSize="10%" objectFit="cover" borderRadius={2} />
       </Link>
       <Box>
         <Link to="/signup">
