@@ -1,4 +1,5 @@
 import {
+  AbsoluteCenter,
   Box,
   Button,
   Center,
@@ -35,7 +36,7 @@ const LoginForm = () => {
 
   return (
     <>
-      <Center>
+      <AbsoluteCenter>
         <Box
           borderRadius="md"
           borderWidth={1}
@@ -101,7 +102,7 @@ const LoginForm = () => {
             </form>
           </VStack>
         </Box>
-      </Center>
+      </AbsoluteCenter>
     </>
   );
 };

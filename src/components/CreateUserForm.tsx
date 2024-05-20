@@ -1,4 +1,12 @@
-import { Box, Button, Center, Input, Spinner, VStack } from "@chakra-ui/react";
+import {
+  AbsoluteCenter,
+  Box,
+  Button,
+  Center,
+  Input,
+  Spinner,
+  VStack,
+} from "@chakra-ui/react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { User } from "../entities/User";
 import usersService from "../services/usersService";
@@ -52,7 +60,7 @@ const CreateUserForm = () => {
 
   return (
     <>
-      <Center>
+      <AbsoluteCenter>
         <Box
           borderRadius="md"
           borderWidth={1}
@@ -138,7 +146,7 @@ const CreateUserForm = () => {
             </VStack>
           </Center>
         </Box>
-      </Center>
+      </AbsoluteCenter>
     </>
   );
 };
