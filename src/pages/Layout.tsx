@@ -22,9 +22,9 @@ const Layout = () => {
       )}
       {!userId && (
         <>
-          <Box height="100vh">
+          <Box height="100vh" width="100vw">
             <NavBar />{" "}
-            <Box padding={5}>
+            <Box width="100vw">
               <Outlet></Outlet>
             </Box>
           </Box>

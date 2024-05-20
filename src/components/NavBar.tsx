@@ -11,7 +11,7 @@ import {
   MenuList,
 } from "@chakra-ui/react";
 import logo from "../assets/skull.jpg";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 const NavBar = () => {
   return (
@@ -20,8 +20,8 @@ const NavBar = () => {
         <Image src={logo} boxSize="60px" objectFit="cover" borderRadius={2} />
       </Link>
       <Box>
-        <Menu>
-          <MenuButton
+        <Link to="/signup">
+          <Button
             as={Button}
             bg="#000080"
             textColor="white"
@@ -30,24 +30,9 @@ const NavBar = () => {
               textColor: "black",
               borderWidth: "1px",
             }}>
-            Profile
-          </MenuButton>
-          <MenuList>
-            <MenuGroup title="Profile">
-              <Link to="/dashboard">
-                <MenuItem>Dashboard</MenuItem>
-              </Link>
-              <Link to="/user_settings">
-                <MenuItem>Account Settings</MenuItem>
-              </Link>
-            </MenuGroup>
-            <MenuDivider />
-            <MenuGroup title="Help">
-              <MenuItem>Docs</MenuItem>
-              <MenuItem>FAQ</MenuItem>
-            </MenuGroup>
-          </MenuList>
-        </Menu>
+            Signup
+          </Button>
+        </Link>
         <Link to="/login">
           <Button colorScheme="gray">Login</Button>
         </Link>

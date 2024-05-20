@@ -1,9 +1,17 @@
 import { SidebarItem, SidebarItemProps } from "../../entities/SidebarItem";
-import { IconButton, List, ListItem, Tooltip } from "@chakra-ui/react";
+import {
+  Box,
+  Grid,
+  GridItem,
+  IconButton,
+  List,
+  ListItem,
+  Tooltip,
+} from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
 
 const SidebarMobileMode = ({ sidebarItems }: SidebarItemProps) => {
-  const sideBarItemsMobileMode = (
+  const sidebarItemsMobile = (
     { icon: Icon, ...item }: SidebarItem,
     index: number
   ) => (
@@ -24,9 +32,27 @@ const SidebarMobileMode = ({ sidebarItems }: SidebarItemProps) => {
     </ListItem>
   );
   return (
-    <List spacing={3}>
-      {sidebarItems.map((item, index) => sideBarItemsMobileMode(item, index))}
-    </List>
+    <Grid
+      templateColumns="1fr"
+      templateRows="1fr auto"
+      width="100%"
+      height="100%">
+      <GridItem width="100%">
+        <List width="100%" height="100%">
+          {sidebarItems[0].map((item, index) =>
+            sidebarItemsMobile(item, index)
+          )}
+        </List>
+      </GridItem>
+      <GridItem width="100%">
+        <Box height="0.5px" bg="gray.400" borderRadius={5}></Box>
+        <List width="100%" height="100%">
+          {sidebarItems[1].map((item, index) =>
+            sidebarItemsMobile(item, index)
+          )}
+        </List>
+      </GridItem>
+    </Grid>
   );
 };
 
