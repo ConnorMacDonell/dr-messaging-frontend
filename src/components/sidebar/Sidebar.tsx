@@ -22,7 +22,8 @@ const Sidebar = () => {
         spacing="5"
         as="nav"
         display={{ base: "none", md: "flex" }}
-        width="100%">
+        width="100%"
+        height="100%">
         <Image src={logo} boxSize="60px" objectFit="cover" borderRadius={2} />
         <SidebarDesktop sidebarItems={SidebarItems} />
       </VStack>

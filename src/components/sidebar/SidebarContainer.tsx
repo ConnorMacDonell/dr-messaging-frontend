@@ -9,23 +9,26 @@ interface Props {
 const SidebarContainer = ({ children, sidebar }: Props) => {
   return (
     <Grid templateAreas={`'sidebar main'`} templateColumns="auto 1fr">
-      <GridItem area="sidebar" as="aside" w="full" p={0}>
+      <GridItem
+        area="sidebar"
+        as="aside"
+        width="100%"
+        height="100vh"
+        bg="#0163A8"
+        padding={0}>
         <Box
           pos="sticky"
           top={0}
-          w={{ base: 0, md: "15vw" }}
-          borderRight="1px solid"
-          borderColor="gray.100"
-          p={{ base: 0, md: 2 }}
+          width={{ base: 0, md: "15vw" }}
+          height={{ base: 0, md: "100%" }}
+          padding={{ base: 0, md: 2 }}
           paddingTop={8}
-          height="100vh"
           overflow="auto"
-          bg="#0163A8"
           textColor="white">
           {sidebar}
         </Box>
       </GridItem>
-      <GridItem as="main" area="main" p={{ base: 6, md: 8 }}>
+      <GridItem as="main" area="main" padding={{ base: 6, md: 8 }}>
         {children}
       </GridItem>
     </Grid>
