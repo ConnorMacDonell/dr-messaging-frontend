@@ -1,17 +1,6 @@
-import {
-  Box,
-  Button,
-  HStack,
-  Image,
-  Menu,
-  MenuButton,
-  MenuDivider,
-  MenuGroup,
-  MenuItem,
-  MenuList,
-} from "@chakra-ui/react";
+import { Box, Button, HStack, Image } from "@chakra-ui/react";
 import logo from "../assets/skull.jpg";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   return (
