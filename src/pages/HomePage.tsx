@@ -1,5 +1,5 @@
 import HeroSection from "../components/HeroSection";
-import homeHeroBackGround from "../assets/ski-hero.jpg";
+import homeHeroBackGround from "../assets/hippocrates.jpg";
 import { Grid, GridItem } from "@chakra-ui/react";
 import NavBar from "../components/NavBar";
 

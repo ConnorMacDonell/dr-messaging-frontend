@@ -30,7 +30,7 @@ const HeroSection = ({ imageSource }: Props) => {
           fontSize="64px"
           fontWeight="600"
           align="center">
-          Ski Hero
+          Messaging
         </Text>
         <Text
           textShadow="1px 1px 2px black"
@@ -38,7 +38,7 @@ const HeroSection = ({ imageSource }: Props) => {
           fontSize="28px"
           fontWeight="600"
           align="center">
-          Find your next adventure
+          Rethink patient outreach
         </Text>
       </Box>
     </Box>
