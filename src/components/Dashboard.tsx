@@ -4,26 +4,47 @@ import {
   Button,
   Center,
   Input,
-  InputGroup,
-  InputRightElement,
-  Link,
   Spinner,
   VStack,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { UserCredentials } from "../entities/User";
 import { SubmitHandler, useForm } from "react-hook-form";
 import FormLabel from "./FormLabel";
+import { Message } from "../entities/Message";
+import { useToast } from "@chakra-ui/react";
+import messageService from "../services/messageService";
 
 const Dashboard = () => {
-  const [show, setShow] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { register, handleSubmit } = useForm<UserCredentials>();
-  const handleClickShowButton = () => setShow(!show);
+  const { register, handleSubmit } = useForm<Message>();
+  const toast = useToast();
 
-  const onSubmit: SubmitHandler<UserCredentials> = async (d) => {
-    setIsLoading(true);
-    setIsLoading(false);
+  const onSubmit: SubmitHandler<Message> = async (d) => {
+    try {
+      setIsLoading(true);
+      await messageService.post(d);
+      setIsLoading(false);
+
+      toast({
+        title: "Message sent",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+    } catch (error: any) {
+      setIsLoading(false);
+      const description =
+        error.code === "ERR_NETWORK"
+          ? "Network error, please try again later."
+          : error?.response?.data?.error;
+      toast({
+        title: "Message failed",
+        description: description,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
   };
 
   return (
@@ -42,38 +63,27 @@ const Dashboard = () => {
                 message="Please enter recipients and message"
               />
               <Input
-                {...register("email", { required: "Email is required." })}
-                placeholder="Email"
-                type="email"
+                {...register("recipients", {
+                  required: "Recipients are required.",
+                })}
+                placeholder="1(408)***-****, 1(408)***-****, ..."
+                type="string"
                 variant="filled"
                 borderRadius={4}
                 marginBottom={3}
                 autoFocus></Input>
-              <InputGroup size="md">
-                <Input
-                  {...register("password", {
-                    required: "Password is required.",
-                  })}
-                  placeholder="Password"
-                  type={show ? "text" : "password"}
-                  variant="filled"
-                  borderRadius={4}
-                  marginBottom={3}
-                  pr="4.5rem"></Input>
-                <InputRightElement>
-                  <Button
-                    h="1.75rem"
-                    size="xs"
-                    onClick={handleClickShowButton}
-                    marginRight={1}
-                    variant="ghost">
-                    {show ? "Hide" : "Show"}
-                  </Button>
-                </InputRightElement>
-              </InputGroup>
+              <Input
+                {...register("message", {
+                  required: "Message is required.",
+                })}
+                placeholder="Hello, my name is Dr. Jones I will..."
+                type="string"
+                variant="filled"
+                borderRadius={4}
+                marginBottom={3}
+                pr="4.5rem"></Input>
               <Center>
                 <VStack>
-                  <Link textColor="gray">Forgot your password?</Link>
                   <Button
                     type="submit"
                     borderRadius="md"
@@ -87,7 +97,7 @@ const Dashboard = () => {
                     variant="ghost"
                     marginBottom={7}
                     textColor="White">
-                    {isLoading ? <Spinner /> : "Login"}
+                    {isLoading ? <Spinner /> : "Send Message"}
                   </Button>
                 </VStack>
               </Center>
