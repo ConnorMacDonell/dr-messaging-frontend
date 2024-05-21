@@ -13,7 +13,7 @@ const HomePage = () => {
         <GridItem height="88vh" width="100vw">
           <HeroSection imageSource={homeHeroBackGround} />
         </GridItem>
-        <GridItem height="12vh" width="100vw"></GridItem>
+        {/* <GridItem height="12vh" width="100vw"></GridItem> */}
       </Grid>
     </>
   );
