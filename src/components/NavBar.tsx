@@ -1,5 +1,5 @@
 import { Box, Button, HStack, Image } from "@chakra-ui/react";
-import logo from "../assets/skull.jpg";
+import logo from "../assets/hermes-staff.jpeg";
 import { Link } from "react-router-dom";
 
 const NavBar = () => {

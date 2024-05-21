@@ -12,7 +12,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useSidebar } from "../../providers/SideBarProvider";
-import logo from "../../assets/skull.jpg";
+import logo from "../../assets/hermes-staff.jpeg";
 
 const Sidebar = () => {
   const { isOpen, onClose } = useSidebar();
