@@ -1,9 +1,10 @@
 import useUser from "../hooks/useUser";
 import useAuth from "../routing/hooks/useAuth";
+import Dashboard from "../components/Dashboard";
 import { authTokenGuard } from "../util/AuthTokenGuard";
 import { safeJsonParse } from "../util/SafeJsonParse";
 
-const Dashboard = () => {
+const DashboardPage = () => {
   const { token, userId } = useAuth();
 
   const tokenGuardResult = safeJsonParse(authTokenGuard)(token);
@@ -11,7 +12,7 @@ const Dashboard = () => {
     console.log(`Dashboard, tokenError: ${tokenGuardResult.error}`);
     return null;
   }
-  const { data, error } = useUser(userId, tokenGuardResult.parsed);
+  const { error } = useUser(userId, tokenGuardResult.parsed);
 
   if (error) {
     console.log(`Dashboard generic error: ${error}`);
@@ -20,11 +21,9 @@ const Dashboard = () => {
 
   return (
     <>
-      <div>Dashboard</div>
-      <div>Hello, {data?.firstName}!</div>
-      <div>Your email is: {data?.email}</div>
+      <Dashboard />
     </>
   );
 };
 
-export default Dashboard;
+export default DashboardPage;
