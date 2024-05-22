@@ -20,7 +20,7 @@ interface Props {
   token: AuthToken;
 }
 
-const CreateMessageForm = ({ token }: Props) => {
+const CreateMessageForm = ({ userId, token }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const { register, handleSubmit } = useForm<CreateMessageObject>();
   const toast = useToast();
@@ -88,6 +88,9 @@ const CreateMessageForm = ({ token }: Props) => {
                 borderRadius={4}
                 marginBottom={3}
                 pr="4.5rem"></Input>
+              <Input
+                {...register("owner_id", { value: userId })}
+                type="hidden"></Input>
               <Center>
                 <VStack>
                   <Button

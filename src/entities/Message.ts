@@ -4,7 +4,7 @@ export interface SendMessageObject {
 }
 
 export interface CreateMessageObject {
-  owner: string;
+  owner_id: string;
   category: string;
   message_body: string;
 }
