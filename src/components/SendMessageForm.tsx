@@ -4,6 +4,7 @@ import {
   Button,
   Center,
   Input,
+  Select,
   Spinner,
   VStack,
 } from "@chakra-ui/react";
@@ -72,16 +73,14 @@ const SendMessageForm = () => {
                 borderRadius={4}
                 marginBottom={3}
                 autoFocus></Input>
-              <Input
-                {...register("message_body", {
-                  required: "Message is required.",
+              <Select
+                {...register("messageCategory", {
+                  required: "Category is required.",
                 })}
-                placeholder="Hello, my name is Dr. Jones I will..."
-                type="string"
+                placeholder="Select patient procedure category"
                 variant="filled"
                 borderRadius={4}
-                marginBottom={3}
-                pr="4.5rem"></Input>
+                marginBottom={3}></Select>
               <Center>
                 <VStack>
                   <Button

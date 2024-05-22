@@ -79,7 +79,7 @@ const CreateMessageForm = ({ userId, token }: Props) => {
                 marginBottom={3}
                 autoFocus></Input>
               <Input
-                {...register("message_body", {
+                {...register("messageBody", {
                   required: "Message body is required.",
                 })}
                 placeholder="Hello, my name is Dr. Jones I will..."
@@ -89,7 +89,7 @@ const CreateMessageForm = ({ userId, token }: Props) => {
                 marginBottom={3}
                 pr="4.5rem"></Input>
               <Input
-                {...register("owner_id", { value: userId })}
+                {...register("ownerId", { value: userId })}
                 type="hidden"></Input>
               <Center>
                 <VStack>
