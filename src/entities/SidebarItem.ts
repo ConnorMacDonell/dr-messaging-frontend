@@ -14,15 +14,15 @@ export interface SidebarItemProps {
 
 export const SidebarItems = [[
   {
-    icon: FaRegMessage,
-    label: "Create Messages",
-    linkTo: "/create_message",
-    group: ""
-  },
-  {
     icon: FaRegPaperPlane,
     label: "Send Messages",
     linkTo: "/send_message",
+    group: ""
+  },
+  {
+    icon: FaRegMessage,
+    label: "Create Messages",
+    linkTo: "/create_message",
     group: ""
   },
 ],
