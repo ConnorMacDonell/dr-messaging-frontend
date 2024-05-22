@@ -1,16 +1,16 @@
 export interface SendMessageObject {
   recipients: string[];
-  message: string;
+  message_body: string;
 }
 
 export interface CreateMessageObject {
   owner: string;
   category: string;
-  message: string;
+  message_body: string;
 }
 
 export interface MessageResponse {
   status: string;
-  message: string;
+  message_body: string;
   error?: string;
 }

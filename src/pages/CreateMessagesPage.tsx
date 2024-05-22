@@ -12,7 +12,8 @@ const CreateMessagesPage = () => {
     console.log(`CreateMessages, tokenError: ${tokenGuardResult.error}`);
     return null;
   }
-  const { error } = useUser(userId, tokenGuardResult.parsed);
+  const parsedToken = tokenGuardResult.parsed;
+  const { error } = useUser(userId, parsedToken);
 
   if (error) {
     console.log(`CreateMessages generic error: ${error}`);
@@ -21,7 +22,7 @@ const CreateMessagesPage = () => {
 
   return (
     <>
-      <CreateMessageForm />
+      <CreateMessageForm userId={userId} token={parsedToken} />
     </>
   );
 };

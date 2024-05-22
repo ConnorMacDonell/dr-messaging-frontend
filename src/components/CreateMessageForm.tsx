@@ -13,8 +13,14 @@ import FormLabel from "./FormLabel";
 import { CreateMessageObject } from "../entities/Message";
 import { useToast } from "@chakra-ui/react";
 import messageService from "../services/messageService";
+import AuthToken from "../entities/AuthToken";
 
-const CreateMessageForm = () => {
+interface Props {
+  userId: string;
+  token: AuthToken;
+}
+
+const CreateMessageForm = ({ token }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const { register, handleSubmit } = useForm<CreateMessageObject>();
   const toast = useToast();
@@ -22,7 +28,7 @@ const CreateMessageForm = () => {
   const onSubmit: SubmitHandler<CreateMessageObject> = async (d) => {
     try {
       setIsLoading(true);
-      await messageService.post(d);
+      await messageService.post(d, token);
       setIsLoading(false);
 
       toast({
@@ -73,8 +79,8 @@ const CreateMessageForm = () => {
                 marginBottom={3}
                 autoFocus></Input>
               <Input
-                {...register("message", {
-                  required: "Message is required.",
+                {...register("message_body", {
+                  required: "Message body is required.",
                 })}
                 placeholder="Hello, my name is Dr. Jones I will..."
                 type="string"

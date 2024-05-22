@@ -73,7 +73,7 @@ const SendMessageForm = () => {
                 marginBottom={3}
                 autoFocus></Input>
               <Input
-                {...register("message", {
+                {...register("message_body", {
                   required: "Message is required.",
                 })}
                 placeholder="Hello, my name is Dr. Jones I will..."
