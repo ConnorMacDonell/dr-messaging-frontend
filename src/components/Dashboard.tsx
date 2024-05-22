@@ -10,16 +10,16 @@ import {
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import FormLabel from "./FormLabel";
-import { Message } from "../entities/Message";
+import { SendMessageObject } from "../entities/Message";
 import { useToast } from "@chakra-ui/react";
 import messageService from "../services/messageService";
 
 const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const { register, handleSubmit } = useForm<Message>();
+  const { register, handleSubmit } = useForm<SendMessageObject>();
   const toast = useToast();
 
-  const onSubmit: SubmitHandler<Message> = async (d) => {
+  const onSubmit: SubmitHandler<SendMessageObject> = async (d) => {
     try {
       setIsLoading(true);
       await messageService.post(d);
@@ -59,7 +59,7 @@ const Dashboard = () => {
           <VStack>
             <form onSubmit={handleSubmit(onSubmit)}>
               <FormLabel
-                title="Create Message"
+                title="Send Message"
                 message="Please enter recipients and message"
               />
               <Input

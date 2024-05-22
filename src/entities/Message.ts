@@ -1,5 +1,11 @@
-export interface Message {
+export interface SendMessageObject {
   recipients: string[];
+  message: string;
+}
+
+export interface CreateMessageObject {
+  owner: string;
+  category: string;
   message: string;
 }
 
