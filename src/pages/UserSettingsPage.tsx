@@ -13,7 +13,7 @@ const UserSettingsPage = () => {
 
   const tokenGuardResult = safeJsonParse(authTokenGuard)(token);
   if (tokenGuardResult.hasError) {
-    console.log(`Dashboard, tokenError: ${tokenGuardResult.error}`);
+    console.log(`User Settings, tokenError: ${tokenGuardResult.error}`);
     return null;
   }
 

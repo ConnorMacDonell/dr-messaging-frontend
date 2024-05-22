@@ -4,9 +4,10 @@ import ErrorPage from "../pages/ErrorPage";
 import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import SignupPage from "../pages/SignupPage";
-import DashboardPage from "../pages/DashboardPage";
 import UserSettingsPage from "../pages/UserSettingsPage";
 import PrivateRoutes from "./PrivateRoutes";
+import CreateMessagesPage from "../pages/CreateMessagesPage";
+import SendMessagesPage from "../pages/SendMessagesPage";
 
 const router = createBrowserRouter([
   {
@@ -22,7 +23,8 @@ const router = createBrowserRouter([
   {
     element: <PrivateRoutes />,
     children: [
-      { path: "dashboard", element: <DashboardPage /> },
+      { path: "create_message", element: <CreateMessagesPage /> },
+      { path: "send_message", element: <SendMessagesPage /> },
       { path: "user_settings", element: <UserSettingsPage /> },
     ],
   },

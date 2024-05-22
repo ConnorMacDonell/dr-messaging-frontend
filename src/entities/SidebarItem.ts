@@ -1,5 +1,5 @@
 import { IconType } from "react-icons";
-import { FaArrowRightFromBracket, FaGauge, FaUser } from "react-icons/fa6";
+import { FaArrowRightFromBracket, FaRegMessage, FaRegPaperPlane, FaUser } from "react-icons/fa6";
 
 export interface SidebarItem {
   icon: IconType;
@@ -14,9 +14,15 @@ export interface SidebarItemProps {
 
 export const SidebarItems = [[
   {
-    icon: FaGauge,
-    label: "Dashboard",
-    linkTo: "/dashboard",
+    icon: FaRegMessage,
+    label: "Create Messages",
+    linkTo: "/create_message",
+    group: ""
+  },
+  {
+    icon: FaRegPaperPlane,
+    label: "Send Messages",
+    linkTo: "/send_message",
     group: ""
   },
 ],

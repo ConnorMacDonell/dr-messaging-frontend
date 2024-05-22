@@ -29,7 +29,7 @@ const LoginForm = () => {
   const onSubmit: SubmitHandler<UserCredentials> = async (d) => {
     setIsLoading(true);
     await onLogin(d);
-    const origin = location.state?.from?.pathname || "/dashboard";
+    const origin = location.state?.from?.pathname || "/send_message";
     navigate(origin);
     setIsLoading(false);
   };

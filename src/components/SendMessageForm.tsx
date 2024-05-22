@@ -14,7 +14,7 @@ import { SendMessageObject } from "../entities/Message";
 import { useToast } from "@chakra-ui/react";
 import messageService from "../services/messageService";
 
-const Dashboard = () => {
+const SendMessageForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { register, handleSubmit } = useForm<SendMessageObject>();
   const toast = useToast();
@@ -109,4 +109,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default SendMessageForm;
