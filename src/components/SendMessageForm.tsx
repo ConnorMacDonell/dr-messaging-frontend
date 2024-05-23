@@ -27,7 +27,7 @@ const SendMessageForm = ({ token, userId }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const { register, handleSubmit } = useForm<SendMessageObject>();
   const { data, error } = useMessages(userId, token);
-  if (error || !data) {
+  if (error) {
     console.log("SendMessageForm error");
     console.log(error);
     return null;
