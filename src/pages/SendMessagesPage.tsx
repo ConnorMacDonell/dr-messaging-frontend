@@ -12,7 +12,9 @@ const SendMessagesPage = () => {
     console.log(`SendMessages, tokenError: ${tokenGuardResult.error}`);
     return null;
   }
-  const { error } = useUser(userId, tokenGuardResult.parsed);
+
+  const parsedToken = tokenGuardResult.parsed;
+  const { error } = useUser(userId, parsedToken);
 
   if (error) {
     console.log(`SendMessages generic error: ${error}`);
@@ -21,7 +23,7 @@ const SendMessagesPage = () => {
 
   return (
     <>
-      <SendMessageForm />
+      <SendMessageForm userId={userId} token={parsedToken} />
     </>
   );
 };

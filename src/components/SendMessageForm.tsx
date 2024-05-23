@@ -14,10 +14,18 @@ import FormLabel from "./FormLabel";
 import { SendMessageObject } from "../entities/Message";
 import { useToast } from "@chakra-ui/react";
 import messageService from "../services/messageService";
+import useMessages from "../hooks/useMessages";
+import AuthToken from "../entities/AuthToken";
 
-const SendMessageForm = () => {
+interface Props {
+  token: AuthToken;
+  userId: string;
+}
+
+const SendMessageForm = ({ token, userId }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const { register, handleSubmit } = useForm<SendMessageObject>();
+  const messages = useMessages(userId, token);
   const toast = useToast();
 
   const onSubmit: SubmitHandler<SendMessageObject> = async (d) => {

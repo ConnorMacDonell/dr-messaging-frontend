@@ -10,7 +10,12 @@ export interface CreateMessageObject {
 }
 
 export interface MessageResponse {
-  status: string;
+  _id: string;
   messageBody: string;
-  error?: string;
+  ownerId: string;
+  category: string;
+}
+
+export interface MessagesListResponse {
+  messages: MessageResponse[];
 }
