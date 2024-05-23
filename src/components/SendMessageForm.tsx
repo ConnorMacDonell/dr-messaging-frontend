@@ -6,9 +6,10 @@ import {
   Input,
   Select,
   Spinner,
+  Text,
   VStack,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import FormLabel from "./FormLabel";
 import { SendMessageObject } from "../entities/Message";
@@ -25,7 +26,27 @@ interface Props {
 const SendMessageForm = ({ token, userId }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const { register, handleSubmit } = useForm<SendMessageObject>();
-  const messages = useMessages(userId, token);
+  const { data, error } = useMessages(userId, token);
+  if (error || !data) {
+    console.log("SendMessageForm error");
+    console.log(error);
+    return null;
+  }
+
+  const [selectedMessage, setMessage] = useState({
+    _id: "",
+    messageBody: "",
+    ownerId: "",
+    category: "",
+  });
+  const onSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const message = data?.find(
+      (message) => message.category === event.target.value
+    );
+    if (!message) throw "Selected category has no associated message.";
+    setMessage(message);
+  };
+
   const toast = useToast();
 
   const onSubmit: SubmitHandler<SendMessageObject> = async (d) => {
@@ -77,7 +98,7 @@ const SendMessageForm = ({ token, userId }: Props) => {
                 })}
                 placeholder="1(408)***-****, 1(408)***-****, ..."
                 type="string"
-                variant="filled"
+                variant="outline"
                 borderRadius={4}
                 marginBottom={3}
                 autoFocus></Input>
@@ -86,9 +107,17 @@ const SendMessageForm = ({ token, userId }: Props) => {
                   required: "Category is required.",
                 })}
                 placeholder="Select patient procedure category"
-                variant="filled"
+                variant="outline"
                 borderRadius={4}
-                marginBottom={3}></Select>
+                marginBottom={3}
+                onChange={onSelectChange}>
+                {data?.map((message) => (
+                  <option key={message._id} value={message.category}>
+                    {message.category}
+                  </option>
+                ))}
+              </Select>
+              {<Text>{selectedMessage?.messageBody}</Text>}
               <Center>
                 <VStack>
                   <Button
