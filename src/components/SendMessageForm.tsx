@@ -14,9 +14,9 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import FormLabel from "./FormLabel";
 import { SendMessageObject } from "../entities/Message";
 import { useToast } from "@chakra-ui/react";
-import messageService from "../services/messageService";
 import useMessages from "../hooks/useMessages";
 import AuthToken from "../entities/AuthToken";
+import sendMessageService from "../services/sendMessageService";
 
 interface Props {
   token: AuthToken;
@@ -40,9 +40,7 @@ const SendMessageForm = ({ token, userId }: Props) => {
     category: "",
   });
   const onSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    const message = data?.find(
-      (message) => message.category === event.target.value
-    );
+    const message = data?.find((message) => message._id === event.target.value);
     if (!message) throw "Selected category has no associated message.";
     setMessage(message);
   };
@@ -52,7 +50,8 @@ const SendMessageForm = ({ token, userId }: Props) => {
   const onSubmit: SubmitHandler<SendMessageObject> = async (d) => {
     try {
       setIsLoading(true);
-      await messageService.post(d);
+      console.log(d);
+      await sendMessageService.postToMessage(d, token);
       setIsLoading(false);
 
       toast({
@@ -104,8 +103,8 @@ const SendMessageForm = ({ token, userId }: Props) => {
                 marginBottom={3}
                 autoFocus></Input>
               <Select
-                {...register("messageCategory", {
-                  required: "Category is required.",
+                {...register("messageId", {
+                  required: "Id is required.",
                 })}
                 variant="outline"
                 borderRadius={4}
@@ -116,7 +115,7 @@ const SendMessageForm = ({ token, userId }: Props) => {
                   Select patient procedure category
                 </option>
                 {data?.map((message) => (
-                  <option key={message._id} value={message.category}>
+                  <option key={message.category} value={message._id}>
                     {message.category}
                   </option>
                 ))}

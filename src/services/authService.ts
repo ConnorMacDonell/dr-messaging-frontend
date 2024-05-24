@@ -1,4 +1,4 @@
-import APIClient from "./api-client";
+import APIClient from "./apiClient";
 import AuthToken from "../entities/AuthToken";
 
 export default new APIClient<AuthToken>('/auth');
