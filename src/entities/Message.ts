@@ -1,6 +1,6 @@
 export interface SendMessageObject {
   recipients: string[];
-  messageCategory: string;
+  messageId: string;
 }
 
 export interface CreateMessageObject {
@@ -18,4 +18,8 @@ export interface MessageResponse {
 
 export interface MessagesListResponse {
   messages: MessageResponse[];
+}
+
+export interface SendMessageResponse {
+  recipients: string[];
 }
