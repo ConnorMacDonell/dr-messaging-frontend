@@ -36,6 +36,11 @@ class APIClient<T> {
     return axiosInstance.post<T>(this.endpoint, data).then(res => res.data);
   }
 
+  postToMessage = (data: any, token: AuthToken) => {
+    this.setAuthHeader(token);
+    return axiosInstance.post<T>(`${this.endpoint}/${data.messageId}`, data).then(res => res.data);
+  }
+
   patch = (id: string, data: any, token: AuthToken) => {
     this.setAuthHeader(token);
     return axiosInstance.patch<T>(`${this.endpoint}/${id}`, data).then((res) => res.data);
