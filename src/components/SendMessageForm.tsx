@@ -81,11 +81,12 @@ const SendMessageForm = ({ token, userId }: Props) => {
     <>
       <AbsoluteCenter>
         <Box
-          borderRadius="md"
-          borderWidth={1}
-          borderColor="black"
           width="50vw"
-          boxShadow="10px 5px 5px gray">
+          borderRadius="md"
+          paddingLeft={5}
+          paddingRight={5}
+          boxShadow="md"
+          bgColor="#FCFCFC">
           <VStack>
             <form onSubmit={handleSubmit(onSubmit)}>
               <FormLabel
@@ -106,18 +107,29 @@ const SendMessageForm = ({ token, userId }: Props) => {
                 {...register("messageCategory", {
                   required: "Category is required.",
                 })}
-                placeholder="Select patient procedure category"
                 variant="outline"
                 borderRadius={4}
                 marginBottom={3}
+                value={selectedMessage._id}
                 onChange={onSelectChange}>
+                <option disabled key="placeholder" value="">
+                  Select patient procedure category
+                </option>
                 {data?.map((message) => (
                   <option key={message._id} value={message.category}>
                     {message.category}
                   </option>
                 ))}
               </Select>
-              {<Text>{selectedMessage?.messageBody}</Text>}
+              <Box
+                minHeight={10}
+                color="gray.100"
+                border="1px"
+                padding={2}
+                borderRadius={4}
+                marginBottom={3}>
+                {<Text textColor="gray">{selectedMessage?.messageBody}</Text>}
+              </Box>
               <Center>
                 <VStack>
                   <Button

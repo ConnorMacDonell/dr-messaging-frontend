@@ -58,10 +58,11 @@ const CreateMessageForm = ({ userId, token }: Props) => {
       <AbsoluteCenter>
         <Box
           borderRadius="md"
-          borderWidth={1}
-          borderColor="black"
           width="50vw"
-          boxShadow="10px 5px 5px gray">
+          paddingLeft={5}
+          paddingRight={5}
+          boxShadow="md"
+          bgColor="#FCFCFC">
           <VStack>
             <form onSubmit={handleSubmit(onSubmit)}>
               <FormLabel
