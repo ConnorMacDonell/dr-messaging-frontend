@@ -8,6 +8,7 @@ import UserSettingsPage from "../pages/UserSettingsPage";
 import PrivateRoutes from "./PrivateRoutes";
 import CreateMessagesPage from "../pages/CreateMessagesPage";
 import SendMessagesPage from "../pages/SendMessagesPage";
+import EditMessagesPage from "../pages/EditMessagesPage";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
     children: [
       { path: "create_message", element: <CreateMessagesPage /> },
       { path: "send_message", element: <SendMessagesPage /> },
+      { path: "edit_message", element: <EditMessagesPage /> },
       { path: "user_settings", element: <UserSettingsPage /> },
     ],
   },
