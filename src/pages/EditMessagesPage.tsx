@@ -2,7 +2,6 @@ import useUser from "../hooks/useUser";
 import useAuth from "../routing/hooks/useAuth";
 import { authTokenGuard } from "../util/AuthTokenGuard";
 import { safeJsonParse } from "../util/SafeJsonParse";
-import SendMessageForm from "../components/SendMessageForm";
 import EditMessageForm from "../components/EditMessageForm";
 
 const EditMessagesPage = () => {
