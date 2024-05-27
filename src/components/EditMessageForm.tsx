@@ -6,7 +6,6 @@ import {
   Input,
   Select,
   Spinner,
-  Text,
   VStack,
 } from "@chakra-ui/react";
 import { ChangeEvent, useState } from "react";
@@ -16,7 +15,7 @@ import { SendMessageObject } from "../entities/Message";
 import { useToast } from "@chakra-ui/react";
 import useMessages from "../hooks/useMessages";
 import AuthToken from "../entities/AuthToken";
-import sendMessageService from "../services/sendMessageService";
+import messageService from "../services/messageService";
 
 interface Props {
   token: AuthToken;
@@ -25,6 +24,7 @@ interface Props {
 
 const EditMessageForm = ({ token, userId }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [inputValue, setInputValue] = useState("");
   const { register, handleSubmit } = useForm<SendMessageObject>();
   const { data, error } = useMessages(userId, token);
   if (error) {
@@ -39,10 +39,17 @@ const EditMessageForm = ({ token, userId }: Props) => {
     ownerId: "",
     category: "",
   });
+
+  const onInputChange = (event: ChangeEvent<HTMLInputElement> | string) => {
+    const value = typeof event === "string" ? event : event.target.value;
+    setInputValue(value);
+  };
+
   const onSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const message = data?.find((message) => message._id === event.target.value);
     if (!message) throw "Selected category has no associated message.";
     setMessage(message);
+    onInputChange(message.messageBody);
   };
 
   const toast = useToast();
@@ -51,7 +58,7 @@ const EditMessageForm = ({ token, userId }: Props) => {
     try {
       setIsLoading(true);
       console.log(d);
-      await sendMessageService.postToMessage(d, token);
+      await messageService.patch(selectedMessage._id, d, token);
       setIsLoading(false);
 
       toast({
@@ -110,32 +117,44 @@ const EditMessageForm = ({ token, userId }: Props) => {
                   </option>
                 ))}
               </Select>
-              <Box
-                minHeight={10}
-                color="gray.100"
-                border="1px"
-                padding={2}
-                borderRadius={4}
-                marginBottom={3}>
-                {<Text textColor="gray">{selectedMessage?.messageBody}</Text>}
-              </Box>
+              <Input
+                placeholder="Edit your messages here."
+                value={inputValue}
+                onChange={onInputChange}
+                disabled={selectedMessage.messageBody === "" ? true : false}
+                marginBottom={3}></Input>
               <Center>
                 <VStack>
-                  <Button
-                    type="submit"
-                    borderRadius="md"
-                    borderWidth={0}
-                    bg="#000080"
-                    _hover={{
-                      bg: "white",
-                      textColor: "black",
-                      borderWidth: "1px",
-                    }}
-                    variant="ghost"
-                    marginBottom={7}
-                    textColor="White">
-                    {isLoading ? <Spinner /> : "Save"}
-                  </Button>
+                  {selectedMessage.messageBody === "" && (
+                    <Button
+                      borderRadius="md"
+                      borderWidth={0}
+                      bg="gray.100"
+                      textColor="white"
+                      marginBottom={7}
+                      _hover={{ bg: "gray.100" }}
+                      cursor="not-allowed"
+                      disabled>
+                      Save
+                    </Button>
+                  )}
+                  {selectedMessage.messageBody !== "" && (
+                    <Button
+                      type="submit"
+                      borderRadius="md"
+                      borderWidth={0}
+                      bg="#000080"
+                      _hover={{
+                        bg: "white",
+                        textColor: "black",
+                        borderWidth: "1px",
+                      }}
+                      variant="ghost"
+                      marginBottom={7}
+                      textColor="White">
+                      {isLoading ? <Spinner /> : "Save"}
+                    </Button>
+                  )}
                 </VStack>
               </Center>
             </form>
