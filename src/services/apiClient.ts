@@ -28,7 +28,7 @@ class APIClient<T> {
 
   getList = (token: AuthToken) => {
     this.setAuthHeader(token);
-    return axiosInstance.get<T>(this.endpoint).then((res) => res.data);
+    return axiosInstance.get<T[]>(this.endpoint).then((res) => res.data);
   }
 
   post = (data: any, token?: AuthToken) => {
