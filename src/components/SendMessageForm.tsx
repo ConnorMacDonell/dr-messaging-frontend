@@ -24,8 +24,7 @@ interface Props {
 }
 
 const SendMessageForm = ({ token, userId }: Props) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const { register, handleSubmit } = useForm<SendMessageObject>();
+  //message query
   const { data, error } = useMessages(userId, token);
   if (error) {
     console.log("SendMessageForm error");
@@ -33,19 +32,22 @@ const SendMessageForm = ({ token, userId }: Props) => {
     return null;
   }
 
-  const [selectedMessage, setMessage] = useState({
+  //hooks
+  const toast = useToast();
+  const [isLoading, setIsLoading] = useState(false);
+  const { register, handleSubmit } = useForm<SendMessageObject>();
+  const [selectedMessage, setSelectedMessage] = useState({
     _id: "",
     messageBody: "",
     ownerId: "",
     category: "",
   });
+
   const onSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const message = data?.find((message) => message._id === event.target.value);
     if (!message) throw "Selected category has no associated message.";
-    setMessage(message);
+    setSelectedMessage(message);
   };
-
-  const toast = useToast();
 
   const onSubmit: SubmitHandler<SendMessageObject> = async (d) => {
     try {
@@ -76,6 +78,7 @@ const SendMessageForm = ({ token, userId }: Props) => {
     }
   };
 
+  //componenet
   return (
     <>
       <AbsoluteCenter>
