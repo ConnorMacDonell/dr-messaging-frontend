@@ -3,15 +3,15 @@ import {
   Box,
   Button,
   Center,
-  Input,
   Select,
   Spinner,
+  Textarea,
   VStack,
 } from "@chakra-ui/react";
 import { ChangeEvent, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import FormLabel from "./FormLabel";
-import { SendMessageObject } from "../entities/Message";
+import { EditMessageObject } from "../entities/Message";
 import { useToast } from "@chakra-ui/react";
 import useMessages from "../hooks/useMessages";
 import AuthToken from "../entities/AuthToken";
@@ -23,9 +23,7 @@ interface Props {
 }
 
 const EditMessageForm = ({ token, userId }: Props) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [inputValue, setInputValue] = useState("");
-  const { register, handleSubmit } = useForm<SendMessageObject>();
+  //message query
   const { data, error } = useMessages(userId, token);
   if (error) {
     console.log("SendMessageForm error");
@@ -33,36 +31,41 @@ const EditMessageForm = ({ token, userId }: Props) => {
     return null;
   }
 
-  const [selectedMessage, setMessage] = useState({
+  //hooks
+  const toast = useToast();
+  const [isLoading, setIsLoading] = useState(false);
+  const [inputValue, setInputValue] = useState("");
+  const { register, handleSubmit } = useForm<EditMessageObject>();
+  const [selectedMessage, setSelectedMessage] = useState({
     _id: "",
     messageBody: "",
     ownerId: "",
     category: "",
   });
 
-  const onInputChange = (event: ChangeEvent<HTMLInputElement> | string) => {
+  const onInputChange = (event: ChangeEvent<HTMLTextAreaElement> | string) => {
     const value = typeof event === "string" ? event : event.target.value;
     setInputValue(value);
   };
 
   const onSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const message = data?.find((message) => message._id === event.target.value);
-    if (!message) throw "Selected category has no associated message.";
-    setMessage(message);
+    if (!message) {
+      console.log(event.target.value);
+      throw "Selected category has no associated message.";
+    }
+    setSelectedMessage(message);
     onInputChange(message.messageBody);
   };
 
-  const toast = useToast();
-
-  const onSubmit: SubmitHandler<SendMessageObject> = async (d) => {
+  const onSubmit: SubmitHandler<EditMessageObject> = async (d) => {
     try {
       setIsLoading(true);
-      console.log(d);
       await messageService.patch(selectedMessage._id, d, token);
       setIsLoading(false);
 
       toast({
-        title: "Message sent",
+        title: "Message saved",
         status: "success",
         duration: 3000,
         isClosable: true,
@@ -83,48 +86,52 @@ const EditMessageForm = ({ token, userId }: Props) => {
     }
   };
 
+  //componenet
   return (
     <>
       <AbsoluteCenter>
         <Box
           width="50vw"
+          height="66vh"
           borderRadius="md"
           paddingLeft={5}
           paddingRight={5}
           boxShadow="md"
           bgColor="#FCFCFC">
-          <VStack>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <FormLabel
-                title="Edit Message"
-                message="Please enter recipients and message"
-              />
-              <Select
-                {...register("messageId", {
-                  required: "Id is required.",
-                })}
-                variant="outline"
-                borderRadius={4}
-                marginBottom={3}
-                value={selectedMessage._id}
-                onChange={onSelectChange}>
-                <option disabled key="placeholder" value="">
-                  Select patient procedure category
-                </option>
-                {data?.map((message) => (
-                  <option key={message.category} value={message._id}>
-                    {message.category}
+          <VStack width="100%" height="100%" display="flex" flexFlow="column">
+            <Box width="100%" height="100%">
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <FormLabel
+                  title="Edit Messages"
+                  message="Select and edit messages"
+                />
+                <Select
+                  width="100%"
+                  variant="outline"
+                  borderRadius={4}
+                  marginBottom={3}
+                  value={selectedMessage._id}
+                  onChange={onSelectChange}>
+                  <option disabled key="placeholder" value="">
+                    Select patient procedure category
                   </option>
-                ))}
-              </Select>
-              <Input
-                placeholder="Edit your messages here."
-                value={inputValue}
-                onChange={onInputChange}
-                disabled={selectedMessage.messageBody === "" ? true : false}
-                marginBottom={3}></Input>
-              <Center>
-                <VStack>
+                  {data?.map((message) => (
+                    <option key={message.category} value={message._id}>
+                      {message.category}
+                    </option>
+                  ))}
+                </Select>
+                <Box height="100%" display="flex" flexBasis="colum">
+                  <Textarea
+                    {...register("messageBody")}
+                    placeholder="Edit your messages here."
+                    value={inputValue}
+                    onChange={onInputChange}
+                    disabled={selectedMessage.messageBody === "" ? true : false}
+                    flex="1"
+                    marginBottom={3}></Textarea>
+                </Box>
+                <Center>
                   {selectedMessage.messageBody === "" && (
                     <Button
                       borderRadius="md"
@@ -155,9 +162,9 @@ const EditMessageForm = ({ token, userId }: Props) => {
                       {isLoading ? <Spinner /> : "Save"}
                     </Button>
                   )}
-                </VStack>
-              </Center>
-            </form>
+                </Center>
+              </form>
+            </Box>
           </VStack>
         </Box>
       </AbsoluteCenter>

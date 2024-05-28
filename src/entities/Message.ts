@@ -1,12 +1,17 @@
-export interface SendMessageObject {
-  recipients: string[];
-  messageId: string;
-}
-
 export interface CreateMessageObject {
   ownerId: string;
   category: string;
   messageBody: string;
+}
+
+export interface EditMessageObject {
+  category: string;
+  messageBody: string;
+}
+
+export interface SendMessageObject {
+  recipients: string[];
+  messageId: string;
 }
 
 export interface MessageResponse {
