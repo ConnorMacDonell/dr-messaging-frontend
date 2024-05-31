@@ -86,6 +86,33 @@ const EditMessageForm = ({ token, userId }: Props) => {
     }
   };
 
+  const onDelete = async () => {
+    try {
+      setIsLoading(true);
+      await messageService.delete(selectedMessage._id, token);
+      setIsLoading(false);
+      toast({
+        title: "Message saved",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+    } catch (error: any) {
+      setIsLoading(false);
+      const description =
+        error.code === "ERR_NETWORK"
+          ? "Network error, please try again later."
+          : error?.response?.data?.error;
+      toast({
+        title: "Message failed",
+        description: description,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  };
+
   //componenet
   return (
     <>
@@ -133,34 +160,68 @@ const EditMessageForm = ({ token, userId }: Props) => {
                 </Box>
                 <Center>
                   {selectedMessage.messageBody === "" && (
-                    <Button
-                      borderRadius="md"
-                      borderWidth={0}
-                      bg="gray.100"
-                      textColor="white"
-                      marginBottom={7}
-                      _hover={{ bg: "gray.100" }}
-                      cursor="not-allowed"
-                      disabled>
-                      Save
-                    </Button>
+                    <Box>
+                      <Button
+                        borderRadius="md"
+                        borderWidth={0}
+                        bg="gray.100"
+                        textColor="white"
+                        marginRight={5}
+                        marginBottom={7}
+                        _hover={{ bg: "gray.100" }}
+                        cursor="not-allowed"
+                        disabled>
+                        Save
+                      </Button>
+                      <Button
+                        borderRadius="md"
+                        borderWidth={0}
+                        bg="gray.100"
+                        textColor="white"
+                        marginBottom={7}
+                        _hover={{ bg: "gray.100" }}
+                        cursor="not-allowed"
+                        disabled>
+                        Delete
+                      </Button>
+                    </Box>
                   )}
                   {selectedMessage.messageBody !== "" && (
-                    <Button
-                      type="submit"
-                      borderRadius="md"
-                      borderWidth={0}
-                      bg="#000080"
-                      _hover={{
-                        bg: "white",
-                        textColor: "black",
-                        borderWidth: "1px",
-                      }}
-                      variant="ghost"
-                      marginBottom={7}
-                      textColor="White">
-                      {isLoading ? <Spinner /> : "Save"}
-                    </Button>
+                    <Box>
+                      <Button
+                        type="submit"
+                        borderRadius="md"
+                        borderWidth={0}
+                        bg="#000080"
+                        _hover={{
+                          bg: "white",
+                          textColor: "black",
+                          borderWidth: "1px",
+                        }}
+                        variant="ghost"
+                        marginRight={5}
+                        marginBottom={7}
+                        textColor="White">
+                        {isLoading ? <Spinner /> : "Save"}
+                      </Button>
+                      <Button
+                        type="button"
+                        borderRadius="md"
+                        borderWidth={0}
+                        bg="red"
+                        _hover={{
+                          bg: "white",
+                          textColor: "black",
+                          borderColor: "red",
+                          borderWidth: "1px",
+                        }}
+                        variant="ghost"
+                        marginBottom={7}
+                        textColor="White"
+                        onClick={onDelete}>
+                        {isLoading ? <Spinner /> : "Delete"}
+                      </Button>
+                    </Box>
                   )}
                 </Center>
               </form>

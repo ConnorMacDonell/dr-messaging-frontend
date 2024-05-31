@@ -45,6 +45,11 @@ class APIClient<T> {
     this.setAuthHeader(token);
     return axiosInstance.patch<T>(`${this.endpoint}/${id}`, data).then((res) => res.data);
   }
+
+  delete = (id: string, token: AuthToken) => {
+    this.setAuthHeader(token);
+    return axiosInstance.delete<T>(`${this.endpoint}/${id}`).then((res) => res.data);
+  }
 }
 
 export default APIClient;
