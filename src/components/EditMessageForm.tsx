@@ -94,7 +94,7 @@ const EditMessageForm = ({ token, userId }: Props) => {
       toast({
         title: "Message saved",
         status: "success",
-        duration: 3000,
+        duration: 5000,
         isClosable: true,
       });
     } catch (error: any) {
