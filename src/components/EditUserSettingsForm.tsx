@@ -42,7 +42,7 @@ const EditUserSettingsForm = ({ userData, token }: Props) => {
         title: "Details edited successfully!",
         description: "Please log in",
         status: "success",
-        duration: 3000,
+        duration: 5000,
         isClosable: true,
       });
     } catch (error: any) {
@@ -55,7 +55,7 @@ const EditUserSettingsForm = ({ userData, token }: Props) => {
         title: "Edit failed",
         description: description,
         status: "error",
-        duration: 3000,
+        duration: 5000,
         isClosable: true,
       });
     }
