@@ -96,7 +96,7 @@ const EditUserSettingsForm = ({ userData, token }: Props) => {
               placeholder="Last Name"
               variant="filled"
               borderRadius={4}
-              marginBottom={5}></Input>
+              marginBottom={4}></Input>
             <Text marginBottom={1} fontWeight={600}>
               Email:
             </Text>
