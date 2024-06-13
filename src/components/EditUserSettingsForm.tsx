@@ -80,7 +80,7 @@ const EditUserSettingsForm = ({ userData, token }: Props) => {
               placeholder="First Name"
               variant="filled"
               borderRadius={4}
-              marginBottom={5}
+              marginBottom={3}
               autoFocus></Input>
             <Text marginBottom={1} fontWeight={600}>
               Last Name:
