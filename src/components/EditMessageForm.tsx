@@ -77,10 +77,10 @@ const EditMessageForm = ({ token, userId }: Props) => {
           ? "Network error, please try again later."
           : error?.response?.data?.error;
       toast({
-        title: "Message failed",
+        title: "Message edit failed",
         description: description,
         status: "error",
-        duration: 5000,
+        duration: 3000,
         isClosable: true,
       });
     }
