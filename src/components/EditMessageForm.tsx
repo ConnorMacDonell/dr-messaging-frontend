@@ -107,7 +107,7 @@ const EditMessageForm = ({ token, userId }: Props) => {
         title: "Message failed",
         description: description,
         status: "error",
-        duration: 5000,
+        duration: 3000,
         isClosable: true,
       });
     }
