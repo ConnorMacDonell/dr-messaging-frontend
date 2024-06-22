@@ -67,7 +67,7 @@ const EditMessageForm = ({ token, userId }: Props) => {
       toast({
         title: "Message saved",
         status: "success",
-        duration: 3000,
+        duration: 7000,
         isClosable: true,
       });
     } catch (error: any) {
@@ -80,7 +80,7 @@ const EditMessageForm = ({ token, userId }: Props) => {
         title: "Message edit failed",
         description: description,
         status: "error",
-        duration: 3000,
+        duration: 7000,
         isClosable: true,
       });
     }
@@ -94,7 +94,7 @@ const EditMessageForm = ({ token, userId }: Props) => {
       toast({
         title: "Message saved",
         status: "success",
-        duration: 3000,
+        duration: 7000,
         isClosable: true,
       });
     } catch (error: any) {
@@ -107,7 +107,7 @@ const EditMessageForm = ({ token, userId }: Props) => {
         title: "Message failed",
         description: description,
         status: "error",
-        duration: 3000,
+        duration: 7000,
         isClosable: true,
       });
     }
