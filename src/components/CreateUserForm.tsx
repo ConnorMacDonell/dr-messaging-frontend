@@ -38,7 +38,7 @@ const CreateUserForm = () => {
         title: "Signup successful!",
         description: "Please log in",
         status: "success",
-        duration: 3000,
+        duration: 5000,
         isClosable: true,
       });
       navigate("/login");
@@ -52,7 +52,7 @@ const CreateUserForm = () => {
         title: "Signup failed",
         description: description,
         status: "error",
-        duration: 3000,
+        duration: 5000,
         isClosable: true,
       });
     }
