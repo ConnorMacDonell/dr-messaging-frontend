@@ -59,7 +59,7 @@ const SendMessageForm = ({ token, userId }: Props) => {
       toast({
         title: "Message sent",
         status: "success",
-        duration: 3000,
+        duration: 5000,
         isClosable: true,
       });
     } catch (error: any) {
@@ -72,7 +72,7 @@ const SendMessageForm = ({ token, userId }: Props) => {
         title: "Message failed",
         description: description,
         status: "error",
-        duration: 3000,
+        duration: 5000,
         isClosable: true,
       });
     }
