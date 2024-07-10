@@ -69,7 +69,7 @@ const SendMessageForm = ({ token, userId }: Props) => {
           ? "Network error, please try again later."
           : error?.response?.data?.error;
       toast({
-        title: "Message failed",
+        title: "Message failed. Please contact Connor.",
         description: description,
         status: "error",
         duration: 7000,
