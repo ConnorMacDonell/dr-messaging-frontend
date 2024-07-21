@@ -30,7 +30,7 @@ const HeroSection = ({ imageSource }: Props) => {
           fontSize="64px"
           fontWeight="600"
           align="center">
-          Messaging
+          Medical Messaging
         </Text>
         <Text
           textShadow="1px 1px 2px black"
