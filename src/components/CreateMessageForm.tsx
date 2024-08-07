@@ -23,23 +23,23 @@ interface Props {
 
 const CreateMessageForm = ({ userId, token }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [isSafeToReset, setIsSafeToReset] = useState(false);
-  const { register, handleSubmit, reset } = useForm<CreateMessageObject>();
+  const { register, handleSubmit, reset, formState } =
+    useForm<CreateMessageObject>();
   const toast = useToast();
 
   useEffect(() => {
-    if (!isSafeToReset) return;
+    if (formState.isSubmitSuccessful) {
+      reset();
+    }
+  }, [formState, reset]);
 
-    reset();
-  }, [reset]);
-
-  const onSubmit: SubmitHandler<CreateMessageObject> = async (d) => {
+  const onSubmit: SubmitHandler<CreateMessageObject> = async (
+    data: CreateMessageObject
+  ) => {
     try {
       setIsLoading(true);
-      await messageService.post(d, token);
+      await messageService.post(data, token);
       setIsLoading(false);
-
-      setIsSafeToReset(true);
 
       toast({
         title: "Message created",
