@@ -5,9 +5,10 @@ import {
   Center,
   Input,
   Spinner,
+  Textarea,
   VStack,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import FormLabel from "./FormLabel";
 import { CreateMessageObject } from "../entities/Message";
@@ -22,14 +23,23 @@ interface Props {
 
 const CreateMessageForm = ({ userId, token }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
-  const { register, handleSubmit } = useForm<CreateMessageObject>();
+  const [isSafeToReset, setIsSafeToReset] = useState(false);
+  const { register, handleSubmit, reset } = useForm<CreateMessageObject>();
   const toast = useToast();
+
+  useEffect(() => {
+    if (!isSafeToReset) return;
+
+    reset();
+  }, [reset]);
 
   const onSubmit: SubmitHandler<CreateMessageObject> = async (d) => {
     try {
       setIsLoading(true);
       await messageService.post(d, token);
       setIsLoading(false);
+
+      setIsSafeToReset(true);
 
       toast({
         title: "Message created",
@@ -79,16 +89,15 @@ const CreateMessageForm = ({ userId, token }: Props) => {
                 borderRadius={4}
                 marginBottom={3}
                 autoFocus></Input>
-              <Input
+              <Textarea
                 {...register("messageBody", {
                   required: "Message body is required.",
                 })}
                 placeholder="Hello, my name is Dr. Jones I will..."
-                type="string"
                 variant="filled"
                 borderRadius={4}
                 marginBottom={3}
-                pr="4.5rem"></Input>
+                pr="4.5rem"></Textarea>
               <Input
                 {...register("ownerId", { value: userId })}
                 type="hidden"></Input>
