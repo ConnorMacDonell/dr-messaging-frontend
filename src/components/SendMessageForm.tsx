@@ -49,11 +49,12 @@ const SendMessageForm = ({ token, userId }: Props) => {
     setSelectedMessage(message);
   };
 
-  const onSubmit: SubmitHandler<SendMessageObject> = async (d) => {
+  const onSubmit: SubmitHandler<SendMessageObject> = async (
+    data: SendMessageObject
+  ) => {
     try {
       setIsLoading(true);
-      console.log(d);
-      await sendMessageService.postToMessage(d, token);
+      await sendMessageService.postToMessage(data, token);
       setIsLoading(false);
 
       toast({
@@ -147,7 +148,14 @@ const SendMessageForm = ({ token, userId }: Props) => {
                     variant="ghost"
                     marginBottom={7}
                     textColor="White">
-                    {isLoading ? <Spinner /> : "Send Message"}
+                    {isLoading ? (
+                      <div>
+                        <Spinner /> - Message sending, this may take a few
+                        moments
+                      </div>
+                    ) : (
+                      "Send Message"
+                    )}
                   </Button>
                 </VStack>
               </Center>
