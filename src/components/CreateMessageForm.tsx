@@ -49,12 +49,13 @@ const CreateMessageForm = ({ userId, token }: Props) => {
       });
     } catch (error: any) {
       setIsLoading(false);
+
       const description =
         error.code === "ERR_NETWORK"
           ? "Network error, please try again later."
-          : error?.response?.data?.error;
+          : error?.response?.data;
       toast({
-        title: "Message failed",
+        title: "Message creation failed",
         description: description,
         status: "error",
         duration: 5000,
