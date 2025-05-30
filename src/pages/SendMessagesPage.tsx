@@ -9,6 +9,9 @@ const SendMessagesPage = () => {
 
   const tokenGuardResult = safeJsonParse(authTokenGuard)(token);
   if (tokenGuardResult.hasError) {
+    console.log(
+      "==================================================================="
+    );
     console.log(`SendMessages, tokenError: ${tokenGuardResult.error}`);
     return null;
   }
@@ -17,6 +20,8 @@ const SendMessagesPage = () => {
   const { error } = useUser(userId, parsedToken);
 
   if (error) {
+    console.log(error.message);
+    console.log("------------------------------------------");
     console.log(`SendMessages generic error: ${error}`);
     return null;
   }
