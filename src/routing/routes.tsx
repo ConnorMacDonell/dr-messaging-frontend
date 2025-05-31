@@ -9,6 +9,8 @@ import PrivateRoutes from "./PrivateRoutes";
 import CreateMessagesPage from "../pages/CreateMessagesPage";
 import SendMessagesPage from "../pages/SendMessagesPage";
 import EditMessagesPage from "../pages/EditMessagesPage";
+import SignupSuccessPage from "../pages/SignupSuccessPage";
+import SignupCanceledPage from "../pages/SignupCanceledPage";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +21,8 @@ const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       { path: "login", element: <LoginPage /> },
       { path: "signup", element: <SignupPage /> },
+      { path: "signup/success", element: <SignupSuccessPage /> },
+      { path: "signup/canceled", element: <SignupCanceledPage /> },
     ],
   },
   {

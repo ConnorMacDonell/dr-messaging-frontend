@@ -1,24 +1,21 @@
+// src/components/CreateUserForm.tsx
 import {
   AbsoluteCenter,
   Box,
   Button,
   Center,
   Input,
-  Spinner,
   VStack,
 } from "@chakra-ui/react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { User } from "../entities/User";
-import usersService from "../services/usersService";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useToast } from "@chakra-ui/react";
 import FormLabel from "./FormLabel";
 
-const CreateUserForm = () => {
-  const navigate = useNavigate();
-  const toast = useToast();
-  const [isLoading, setIsLoading] = useState(false);
+interface Props {
+  onFormSubmit: (data: User) => void;
+}
+
+const CreateUserForm = ({ onFormSubmit }: Props) => {
   const { register, handleSubmit } = useForm<User>({
     defaultValues: {
       firstName: "",
@@ -28,34 +25,9 @@ const CreateUserForm = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<User> = async (d) => {
-    try {
-      setIsLoading(true);
-      await usersService.post(d);
-      setIsLoading(false);
-
-      toast({
-        title: "Signup successful!",
-        description: "Please log in",
-        status: "success",
-        duration: 5000,
-        isClosable: true,
-      });
-      navigate("/login");
-    } catch (error: any) {
-      setIsLoading(false);
-      const description =
-        error.code === "ERR_NETWORK"
-          ? "Network error, please try again later."
-          : error?.response?.data?.error;
-      toast({
-        title: "Signup failed",
-        description: description,
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-      });
-    }
+  const onSubmit: SubmitHandler<User> = (data) => {
+    // Store the form data and move to next step
+    onFormSubmit(data);
   };
 
   return (
@@ -72,7 +44,7 @@ const CreateUserForm = () => {
               <form onSubmit={handleSubmit(onSubmit)}>
                 <FormLabel
                   title="Welcome!"
-                  message="Please enter new account details"
+                  message="Please enter your account details"
                 />
                 <Input
                   {...register("firstName", {
@@ -139,7 +111,7 @@ const CreateUserForm = () => {
                     marginBottom={10}
                     marginTop={7}
                     width="33%">
-                    {isLoading ? <Spinner /> : "Sign Up"}
+                    Continue to Plans
                   </Button>
                 </Center>
               </form>
