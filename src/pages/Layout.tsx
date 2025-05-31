@@ -6,7 +6,7 @@ import SidebarContainer from "../components/sidebar/SidebarContainer";
 import useAuth from "../routing/hooks/useAuth";
 
 const Layout = () => {
-  const { userId, token } = useAuth();
+  const { userId } = useAuth();
 
   return (
     <>

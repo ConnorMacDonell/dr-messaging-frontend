@@ -1,8 +1,11 @@
 import axios from "axios";
 import AuthToken from "../entities/AuthToken";
 
+// Use environment variable for production, fallback to localhost for development
+const baseURL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: baseURL,
   headers: {
     'Content-Type': 'application/json',
     Accept: "application/json",
