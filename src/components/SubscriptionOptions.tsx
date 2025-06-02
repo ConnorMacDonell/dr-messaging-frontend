@@ -21,7 +21,7 @@ interface Props {
 
 const SubscriptionOptions = ({ userData }: Props) => {
   // TODO: Replace these with your actual Stripe Payment Link URLs from your dashboard
-  const basicPlanUrl = `https://buy.stripe.com/eVqeVd0mldIkdDaf7lfrW04`;
+  const basicPlanUrl = `https://buy.stripe.com/4gM28r0mldIkgPmf7lfrW06`;
   const premiumPlanUrl = `https://buy.stripe.com/6oU8wPc538o0dDaaR5frW05`;
 
   const handlePlanSelection = (url: string, planType: string) => {
